@@ -2,5 +2,5 @@
 *.pot
 *.pyc
 local_settings.py
-mauritiuspython.org
-.org#
+*.org
+*.org#
