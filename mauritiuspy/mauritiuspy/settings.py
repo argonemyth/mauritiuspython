@@ -1,30 +1,58 @@
 # Django settings for mauritiuspy project.
 
-DEBUG = True
+import os
+PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__)))
+
+if 'deathleak' in PROJECT_DIR:
+    DEBUG = True
+else:
+    DEBUG = False
+
 TEMPLATE_DEBUG = DEBUG
 
+# For what?
+INTERNAL_IPS = ('127.0.0.1', )
+
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Fei', 'fei@argonemyth.com'),
 )
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+if 'deathleak' in PROJECT_DIR:
+    # local db
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': os.path.join(PROJECT_DIR, "mauritiuspy.db"),  # Or path to database file if using sqlite3.
+            'USER': '',                      # Not used with sqlite3.
+            'PASSWORD': '',                  # Not used with sqlite3.
+            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'mauritiuspython',  # Or path to database file if using sqlite3.
+            'USER': 'maupython',                      # Not used with sqlite3.
+            'PASSWORD': 'maupy@node',                  # Not used with sqlite3.
+            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+if 'deathleak' in PROJECT_DIR:
+    TIME_ZONE = 'Indian/Mauritius'
+else:
+    #TIME_ZONE = 'America/Chicago'
+    TIME_ZONE = None
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -45,18 +73,18 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = '/var/www/media/mauritiuspython.com/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = '/var/www/static/mauritiuspython.com/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -149,3 +177,12 @@ LOGGING = {
         },
     }
 }
+
+# Mail Info
+EMAIL_HOST = 'mail.gandi.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'admin@argonemyth.com'
+EMAIL_HOST_PASSWORD = 'tingohell@286'
+SERVER_EMAIL = 'admin@argonemyth.com'
+EMAIL_SUBJECT_PREFIX = "[argonemyth.com]"
