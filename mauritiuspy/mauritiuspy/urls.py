@@ -4,9 +4,12 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+from views import HomeView
+
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'mauritiuspy.views.home', name='home'),
+    #url(r'^$', 'mauritiuspy.views.home', name='home'),
+    url(r'^$', HomeView.as_view(), name='home'),
     # url(r'^mauritiuspy/', include('mauritiuspy.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

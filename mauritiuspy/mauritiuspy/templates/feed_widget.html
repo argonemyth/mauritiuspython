@@ -1,0 +1,42 @@
+{% comment %}
+# This file is part of Mauritius Python User Group.
+# Copyright (C) 2012 Argonemyth, Inc.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+{% endcomment %} 
+    <div class='module' id='recent-activity-feed'>
+        <div class='module-head'>
+            <h3>Recent site activity</h3>
+        </div>
+        <div class='module-body'>
+            <ul>
+                <li>Test</li>
+                <li>Test</li>
+                <li>Test</li>
+                <li>Test</li>
+                <li>Test</li>
+                <li>Test</li>
+                <li>Test</li>
+                {% comment %}
+                {% for answer in recent_feed_items %}
+                {% include answer.template_for_feed %}
+                <div class="clearer"></div>
+                {% endfor %}
+                {% endcomment %}
+            </ul>
+            
+        </div>
+        <div class="module-foot">
+        </div>
+    </div>

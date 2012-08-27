@@ -1,0 +1,75 @@
+{% extends 'base/one_column.html' %}
+{% comment %}
+# This file is part of Maritius Python User Group.
+# Copyright (C) 2012 Fei Tan 
+# Copyright (C) 2012 Agonemyth, Inc. 
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% block title %}
+Mauritius Python User Group
+{% endblock title %}
+
+{% block body_id %}landing{% endblock body_id %}
+
+{% block js_in_head %}
+{{ block.super }}
+<script type="text/javascript">
+document.documentElement.className = 'javascript_is_enabled';
+</script>
+{% endblock %}
+
+{% block content %}
+    {# This page is only shown to non-logged-in users. #}
+    <div class="module" id="landing-module">
+        <div class="module-body">
+            <p id="landing-message">
+                <img src="{{ STATIC_URL }}images/penguin.png" style="float: left; padding: 0 20px 20px 10px;" height="120" /><a href="/about/" title="Community for python hackers in Mauritius">Mauritius Python User Group</a> is dedicated to Python hackers and enthusiastic in Mauritius. We organize regular meetups and workshops.
+            </p>
+
+            <div class="submodule-container">
+                <div class="submodule">
+                    <h4><a href='#'>attend meetups</a></h4>
+                    <p>practice with common <abbr title="Free, open source software">FOSS</abbr> technologies with our <a href='#'>training missions &raquo;</a></p>
+                </div>
+                <div class="submodule">
+                    <h4><a href='#'>workshops</a></h4>
+                    <p>browse tasks across open source <a href='#'>by skill, difficulty, or project &raquo;</a></p>
+                </div>
+                <div class="submodule">
+                    <h4><a href='#'>help us</a></h4>
+                    <p>discover tutorials, project nights, and other <a href="/events/">online and face-to-face events &raquo;</a></p>
+                </div>
+                <div class="submodule">
+                    <h4><a href='/guide/'>support us</a></h4>
+                    <p>use this site to <a href='/guide/'>make your favorite project more friendly &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class='column three-column'>
+    {% include 'feed_widget.html' %}
+    </div>
+
+    <div class='column three-column'>
+    {% include 'event_widget.html' %}
+    </div>
+
+    <div class='column three-column three-column-last'>
+    {% include 'announcement_widget.html' %}
+    </div>
+
+{% endblock content %}
