@@ -153,9 +153,10 @@ INSTALLED_APPS = (
     'south',
     'mauritiuspy',
     'userena',
-    # The following two apps are required by userena
+    # The following three apps are required by userena
     'guardian',
     'easy_thumbnails',
+    'account',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -204,4 +205,4 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # profile
-AUTH_PROFILE_MODULE = "profile.MyProfile"
+AUTH_PROFILE_MODULE = "account.Profile"
