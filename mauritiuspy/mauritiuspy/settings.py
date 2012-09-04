@@ -156,7 +156,7 @@ INSTALLED_APPS = (
     # The following three apps are required by userena
     'guardian',
     'easy_thumbnails',
-    'account',
+    'accounts',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -205,4 +205,12 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # profile
-AUTH_PROFILE_MODULE = "account.Profile"
+AUTH_PROFILE_MODULE = "accounts.Profile"
+
+# Required by Django-guardian
+ANONYMOUS_USER_ID = -1
+
+# Login related URLs
+LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
