@@ -5,4 +5,4 @@ local_settings.py
 *.org
 *.org#
 *.db
-evn
+env
