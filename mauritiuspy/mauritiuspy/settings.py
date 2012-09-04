@@ -122,7 +122,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # The following line enables users to choose their default
+    # language in their profile
+    'userena.middleware.UserenaLocaleMiddleware',
 )
 
 ROOT_URLCONF = 'mauritiuspy.urls'
@@ -149,6 +152,10 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'south',
     'mauritiuspy',
+    'userena',
+    # The following two apps are required by userena
+    'guardian',
+    'easy_thumbnails',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -188,3 +195,13 @@ EMAIL_HOST_USER = 'admin@argonemyth.com'
 EMAIL_HOST_PASSWORD = 'tingohell@286'
 SERVER_EMAIL = 'admin@argonemyth.com'
 EMAIL_SUBJECT_PREFIX = "[argonemyth.com]"
+
+# We are going to use userena's auth backend for user authentication
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# profile
+AUTH_PROFILE_MODULE = "profile.MyProfile"
