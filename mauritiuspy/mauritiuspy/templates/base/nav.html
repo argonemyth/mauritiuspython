@@ -57,7 +57,8 @@
                 {% endcomment %}
             {% else %}
                 {# <li><a id='login' href='{% url oh_login %}'>log in / <strong>sign up</strong></a></li> #}
-                <li><a id='login' href='#'>log in / <strong>sign up</strong></a></li>
+                <li><a id='login' href='{% url userena.views.signin %}'>log in</a></li>
+                <li><a id='signup' href='{% url userena.views.signup %}'><strong>sign up</strong></a></li>
                 {% comment %}
                     To have the user return to the page they were on after
                     logging in, add this query string to the href above:
