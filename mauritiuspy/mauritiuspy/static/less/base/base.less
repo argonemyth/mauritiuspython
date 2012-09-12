@@ -8,6 +8,7 @@
 /* coloration */
 
 @lightest-grey: #f8f8f8;
+@light-grey: #E6E3DE;
 @medium-grey: #666;
 @dark-grey: #333;
 @darkest-grey: #222;
@@ -15,8 +16,7 @@
 @orange: #FF6D3D;
 /* @orange: #FF823E; */
 @white: #FFF;
-/* @trans-blue: rgba(100, 200, 255,.3); */
-@trans-blue: rgba(56, 124, 181,.3);
+@trans-blue: rgba(100, 200, 255,.3); 
 
 @page-bg: @lightest-grey url('/static/images/light-sq.png') repeat;
 
@@ -91,7 +91,15 @@
 
 /* styles */
 
-body { font: @normal-size Tuffy, Helvetica, sans-serif; background: @lightest-grey url('/static/images/light-sq.png') repeat; color: @default-text-color; width: 100%; .centered; padding: 0; }
+body { 
+    font: @normal-size Tuffy, Helvetica, sans-serif; 
+    /* background: @lightest-grey url('/static/images/light-sq.png') repeat; */ 
+    background: @lightest-grey url('/static/images/metal.png') repeat; 
+    color: @default-text-color; 
+    width: 100%; 
+    .centered; 
+    padding: 0; 
+}
 
 .link_like, a, body .ui-widget-content a { color: @orange; text-decoration: none; cursor:pointer; cursor:hand; }
 
