@@ -44,7 +44,7 @@
             <div class="date-time">Ends:   {% blocktrans with event.end|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}</div>
         </div>
         <div class="module-body">
-            <p style="font-size: 1.2em">{{event.description}}</p>
+            {{ event.description|safe }}
             <p><a href="#">RSVP Now &raquo;</a></p>
             <div class="separator"></div>
             <h3>IDEAS</h3>
