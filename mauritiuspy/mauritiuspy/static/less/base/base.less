@@ -141,6 +141,10 @@ h1 a, h1 a:hover { text-decoration: none; }
     padding-bottom: 30px; 
 }
 
+.title-shadow {
+    text-shadow: -1px 1px 0 @white, -2px 2px 0 rgba(0, 0, 0, 0.1); 
+}
+
 .module { 
     width: 100%; 
     margin-bottom: 15px; 
@@ -155,11 +159,19 @@ h1 a, h1 a:hover { text-decoration: none; }
         ul li a { float: right; padding-top: 5px; }
         h3 { 
             color: @orange;
-            text-shadow: -1px 1px 0 #fff, -2px 2px 0 rgba(0, 0, 0, 0.1); 
             float: none; 
             padding: 4px 10px 7px 0; 
-            font-size: 2em;
+            font-size: 2.2em;
+            .title-shadow;
         }
+        .date-time {
+            display: inline-block;
+            font-size: 1.2em;
+            line-height: 150%;
+            margin-right: 20px;
+            .title-shadow;
+        }
+
     }
     .module-body { clear: both; padding: 10px @standard-padding @standard-padding @standard-padding;} 
     .module-foot { 
@@ -457,4 +469,11 @@ body#people-map #search_engine_is_down_message { float: left; display: block; ma
 
 .module .link-without-style {
     color: inherit;
+}
+
+.separator {
+    background: transparent url('/static/images/separator.png') 50% 0 no-repeat;
+    clear: both;
+    height: 2px;
+    margin-bottom: 0;
 }

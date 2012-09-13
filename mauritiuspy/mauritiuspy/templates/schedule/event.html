@@ -40,12 +40,14 @@
     <div class="module">
         <div class="module-head">
             <h3>{{event.title}}</h3>
-            <div>Starts: {% blocktrans with event.start|date:_("DATETIME_FORMAT") as start_date %}{{ start_date }}{% endblocktrans %}</div>
-            <div>Ends:   {% blocktrans with event.end|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}</div>
+            <div class="date-time">Starts: {% blocktrans with event.start|date:_("DATETIME_FORMAT") as start_date %}{{ start_date }}{% endblocktrans %}</div>
+            <div class="date-time">Ends:   {% blocktrans with event.end|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}</div>
         </div>
         <div class="module-body">
             <p style="font-size: 1.2em">{{event.description}}</p>
             <p><a href="#">RSVP Now &raquo;</a></p>
+            <div class="separator"></div>
+            <h3>IDEAS</h3>
         </div> <!-- /#module-body -->
     </div> <!-- /*landing-module -->
 {% endblock content %}
