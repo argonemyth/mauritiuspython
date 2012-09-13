@@ -19,5 +19,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # Account related
-    (r'^accounts/', include('userena.urls')),
+    url(r'^accounts/', include('userena.urls')),
+
+    # For Events
+    url(r'^events/', include('schedule.urls')),
 )

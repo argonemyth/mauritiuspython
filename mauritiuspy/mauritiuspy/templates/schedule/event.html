@@ -1,0 +1,51 @@
+{% extends 'base/one_column.html' %}
+{% comment %}
+# This file is part of Maritius Python User Group.
+# Copyright (C) 2012 Fei Tan 
+# Copyright (C) 2012 Agonemyth, Inc. 
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% comment %}
+{% load base_extras %}
+{% load profile_extras %}
+{% endcomment %}
+{% load i18n %}
+{% load scheduletags %}
+
+{% block title %}{{ event.title }}{% endblock title %}
+
+{% block body_id %}landing{% endblock body_id %}
+
+{% block content %}
+    <div class="column two-column-left">
+        <div class="module" id="event-map">
+        </div>
+    </div>
+
+    <div class="column two-column-right">
+        <div class="module" id="event-details">
+            <div class="module-head">
+                <h3>{{event.title}}</h3>
+                <div>Starts: {% blocktrans with event.start|date:_("DATETIME_FORMAT") as start_date %}{{ start_date }}{% endblocktrans %}</div>
+                <div>Ends:   {% blocktrans with event.end|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}</div>
+            </div>
+            <div class="module-body">
+                <p style="font-size: 1.2em">{{event.description}}</p>
+                <p><a href="#">RSVP Now &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

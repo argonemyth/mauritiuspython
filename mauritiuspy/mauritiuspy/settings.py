@@ -157,6 +157,8 @@ INSTALLED_APPS = (
     'guardian',
     'easy_thumbnails',
     'accounts',
+    # The following two apps are for events and reservation
+    'schedule',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -214,3 +216,17 @@ ANONYMOUS_USER_ID = -1
 LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.request", # Needed by django-schedule 
+)
+
+# For django-schedule
+FIRST_DAY_OF_WEEK = 1 # default value is 0 for Sunday
