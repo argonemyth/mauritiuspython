@@ -159,6 +159,7 @@ INSTALLED_APPS = (
     'accounts',
     # The following two apps are for events and reservation
     'schedule',
+    'easy_maps',
 )
 
 # A sample logging configuration. The only tangible logging
