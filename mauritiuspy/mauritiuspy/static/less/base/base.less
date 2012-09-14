@@ -4,6 +4,10 @@
 @font-face { font-family: Tuffy; font-weight: bold; src: url('/static/fonts/tuffy_bold.ttf');}
 @font-face { font-family: Tuffy; font-style: italic; src: url('/static/fonts/tuffy_italic.ttf');}
 @font-face { font-family: Tuffy; font-weight: bold; font-style: italic; src: url('/static/fonts/tuffy_bold_italic.ttf');}
+@font-face { font-family: Prociono; src: url('/static/fonts/Prociono.otf');}
+@font-face { font-family: Orbitron; src: url('/static/fonts/orbitron-medium.ttf');}
+@font-face { font-family: Orbitron; font-weight: bold; src: url('/static/fonts/orbitron-bold.ttf');}
+@font-face { font-family: Orbitron_Black; src: url('/static/fonts/orbitron-black.ttf');}
 
 /* coloration */
 
@@ -161,7 +165,7 @@ h1 a, h1 a:hover { text-decoration: none; }
             color: @orange;
             float: none; 
             padding: 4px 10px 7px 0; 
-            font-size: 2.2em;
+            font-size: 1.5em;
             .title-shadow;
         }
         .date-time {
@@ -212,8 +216,12 @@ ul { padding: 0; margin: 0; list-style: none; }
 h1, h2, h3, h4, h5 { margin: 0; clear: both;}
 
 h1 {
-    font-weight: normal;
     font-size: 23pt;
+    font-weight: normal;
+}
+
+h1, h2, h3 { 
+    font-family: Orbitron, Tuffy, Helvetica, sans-serif; 
 }
 
 #nav-container {
@@ -229,7 +237,7 @@ h1 {
     border-top: 0;
     .width-and-padding(@total-width, @standard-padding);
 
-    h1 { float: left; margin: 10px 0; }
+    h1 { float: left; margin: 14px 0; }
     ul { list-style: none; margin: 0; float: right; }
     li { float: right; margin-left: 20px; margin-top: 10px; }
 }
@@ -293,8 +301,7 @@ ul#links { margin-left: 20px; }
     a { color: @white; } 
     h3 { 
         color: #ddd; 
-        font-size: 1.2em; 
-        font-weight: bold;
+        font-size: 1.1em; 
         margin-bottom: 0.8em;
         text-shadow: -1px 1px 0 @orange, -3px 3px 0 rgba(0, 0, 0, 0.15); 
     }
