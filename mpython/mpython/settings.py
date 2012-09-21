@@ -3,10 +3,14 @@
 import os
 PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__)))
 
+"""
 if 'deathleak' in PROJECT_DIR:
     DEBUG = True
 else:
     DEBUG = False
+"""
+DEBUG = False
+
 
 TEMPLATE_DEBUG = DEBUG
 

@@ -150,7 +150,8 @@ h1 a, h1 a:hover { text-decoration: none; }
 }
 
 .module { 
-    width: 100%; 
+    /*width: 100%;*/
+    width: 97%;
     margin-bottom: 15px; 
     .border-radius(4px); 
     /* border: @module-border; */ 
@@ -190,18 +191,23 @@ h1 a, h1 a:hover { text-decoration: none; }
 .submodule-container {
     float: none;
     clear: both;
-    width: 100%;
-    .centered;
     padding-top: 10px;
+    width: 100%;
+    padding-bottom: 30px;
+    .centered;
 }
 
 .submodule {
     /* background-color: @emphasized-module-interior;  */
     margin: 0 10px @standard-padding 0; 
+    float: left;
+    width: 21%;
     padding: 8px 10px; 
     border: @submodule-border; 
-    float: left;
+    margin-right: 12px; 
+    font-size: 1.15em;
     text-align: center;
+    .screw-you-webkit;
 
     .submodule-head {
         margin-bottom: 5px;
@@ -210,7 +216,15 @@ h1 a, h1 a:hover { text-decoration: none; }
     .submodule-body {
         clear: both;
     }
+
+    h4 {
+        font-size: 1.5em;
+        float: none;
+    }
+
+    p { padding: 5px 0; }
 }
+
 ul { padding: 0; margin: 0; list-style: none; }
 
 h1, h2, h3, h4, h5 { margin: 0; clear: both;}
@@ -423,7 +437,9 @@ dd { margin-top: .5em; margin-left: 1.2em; }
     #greeting #next-steps li { font-size: 120%; float: left; width: 210px; margin: 10px 20px 0 0; }
 
 #error #content { padding: 0 300px; 
-    .module { width: 400px; 
+    .module { 
+        width: 97%; 
+        margin-top: 13px;
         .head { width: 96%; color: #aaa; padding: 2%; text-align: center; font-weight: bold; font-size: 96pt; }
         .body { width: 90%; }
     }
