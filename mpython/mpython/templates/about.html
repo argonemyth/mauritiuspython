@@ -1,0 +1,51 @@
+{% extends 'base/one_column.html' %}
+{% comment %}
+# This file is part of Maritius Python User Group.
+# Copyright (C) 2012 Fei Tan 
+# Copyright (C) 2012 Agonemyth, Inc. 
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% block title %} about {% endblock title %}
+
+{% block body_id %}landing{% endblock body_id %}
+
+{% block js_in_head %}
+{{ block.super }}
+<script type="text/javascript">
+document.documentElement.className = 'javascript_is_enabled';
+</script>
+{% endblock %}
+
+{% block content %}
+    {# This page is only shown to non-logged-in users. #}
+    <div class="module" id="landing-module">
+        <div class="module-body">
+            <p>Mauritius Python User Group is an open community. We welcome you regardless of your age, sex, and programming background. As long as you are interested in Python, you belong here. We organize <a href="#">monthly meetings</a> and <a href="#">workshops</a> for developers, learner and employers.
+            </p>
+        </div> <!-- /#module-body -->
+        <div class="module-head">
+            <h3>Core Team</h3>
+        </div>
+        <div class="module-body">
+            <ul>
+                <li><a target="_blank" href="http://www.argonemyth.com">Fei Tan</a></li>
+            </ul>
+        </div>
+        <div class="module-head">
+            <h3>Contributors</h3>
+        </div>
+    </div> <!-- /*landing-module -->
+{% endblock content %}
