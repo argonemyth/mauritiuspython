@@ -36,8 +36,10 @@ document.documentElement.className = 'javascript_is_enabled';
     <div class="module" id="landing-module">
         <div class="module-body">
             <p id="landing-message">
-            So, you are a Python hacker, or you are interested in discovering this amazing programming language, and, you happen to live in Mauritius. Join our <a href="/about/" title="Community for python hackers in Mauritius">Mauritius Python User Group</a>!<p>
-            <p>is an open community. We welcome you regardless of your age, sex, and programming background. As long as you are interested in Python, you belong here. We organize <a href="#">monthly meetings</a> and <a href="#">workshops</a> for developers, learner and employers.
+            So, you are a Python hacker, or you are interested in discovering this amazing programming language, and, you happen to live in Mauritius. Join our <a href="/about/" title="Community for python hackers in Mauritius">Mauritius Python User Group</a>!
+            </p>
+            <p style="font-size: 1.1em">
+            [[The development of the website is still a on-going project. If you want to contribute, feel free to <a href="/contact/" title="Contact Us">contact us</a>.]]
             </p>
         </div> <!-- /#module-body -->
     </div> <!-- /*landing-module -->
@@ -51,6 +53,6 @@ document.documentElement.className = 'javascript_is_enabled';
     </div>
 
     <div class='column three-column three-column-last'>
-    {% include 'announcement_widget.html' %}
+    {% include 'siteactivity_widget.html' %}
     </div>
 {% endblock content %}
