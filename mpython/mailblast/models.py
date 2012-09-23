@@ -2,7 +2,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
-from django.conf import settings
+from datetime import datetime
+from mailblast import settings
 
 
 class Newsletter(models.Model):
@@ -13,14 +14,13 @@ class Newsletter(models.Model):
     title = models.CharField(_('newsletter title'), max_length=200)
     slug = models.SlugField(db_index=True, unique=True)
     active = models.BooleanField(_('active'), default=True)
-    newsletter_type = models.PositiveSmallIntegerField(_('type'), i
+    newsletter_type = models.PositiveSmallIntegerField(_('type'), 
                       choices=settings.NEWSLETTER_TYPE,
                       help_text=_("The newsletter type determines what templates it will use."))
     
-    sender_name = models.CharField(max_length=200, verbose_name=_('sender name'))
-    sender_email = models.EmailField(verbose_name=_('sender e-mail'),)
-    reply_email = models.EmailField(verbose_name=_("reply-to"), blank=True,
-                                    default=sender_email)
+    sender_name = models.CharField(_('sender name'), max_length=200)
+    sender_email = models.EmailField(_('sender e-mail'))
+    reply_email = models.EmailField(_("reply-to"), blank=True)
 
     date_create = models.DateTimeField(_('creation date'), auto_now_add=True)
     date_modify = models.DateTimeField(_('modification date'), auto_now=True)
