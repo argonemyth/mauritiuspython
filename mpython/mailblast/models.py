@@ -5,6 +5,61 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 
+class Newsletter(models.Model):
+    """
+    A newsletter we can send to contacts.
+    It manages the subscribers.
+    """
+    title = models.CharField(_('newsletter title'), max_length=200)
+    slug = models.SlugField(db_index=True, unique=True)
+    active = models.BooleanField(_('active'), default=True)
+    newsletter_type = models.PositiveSmallIntegerField(_('type'), i
+                      choices=settings.NEWSLETTER_TYPE,
+                      help_text=_("The newsletter type determines what templates it will use."))
+    
+    sender_name = models.CharField(max_length=200, verbose_name=_('sender name'))
+    sender_email = models.EmailField(verbose_name=_('sender e-mail'),)
+    reply_email = models.EmailField(verbose_name=_("reply-to"), blank=True,
+                                    default=sender_email)
+
+    date_create = models.DateTimeField(_('creation date'), auto_now_add=True)
+    date_modify = models.DateTimeField(_('modification date'), auto_now=True)
+
+    # Fields below are for later
+    #site = models.ForeignKey(Site, verbose_name=_("site"), related_name="newsletters", default=1)
+    #language = models.CharField(max_length=6, verbose_name=_("language"), choices=settings.LANGUAGES)
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = _('newsletter')
+        verbose_name_plural = _('newsletters')
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('newsletter_detail', (),
+                {'newsletter_slug': self.slug })
+
+    @models.permalink
+    def subscribe_url(self):
+        return ('newsletter_subscribe_request', (),
+                {'newsletter_slug': self.slug })
+
+    @models.permalink
+    def unsubscribe_url(self):
+        return ('newsletter_unsubscribe_request', (),
+                {'newsletter_slug': self.slug })
+
+    @models.permalink
+    def update_url(self):
+        return ('newsletter_update_request', (),
+                {'newsletter_slug': self.slug })
+
+    def get_sender(self):
+        return u'%s <%s>' % (self.sender_name, self.sender_email)
+
+
 class Subscription(models.Model):
     """
     A individual subscription from a human being, could be an user,
@@ -34,7 +89,7 @@ class Subscription(models.Model):
             self.email_field = email
     email = property(get_email, set_email) 
     
-    create_date = models.DateTimeField(editable=False, default=datetime.now)
+    date_create = models.DateTimeField(editable=False, default=datetime.now)
     # When user changed setting in user profile
     subscribed = models.BooleanField(_('subscribed'), default=True, db_index=True)
 
@@ -74,60 +129,6 @@ class Subscription(models.Model):
             return u'%s <%s>' % (self.name, self.email)
 
         return u'%s' % (self.email)
-
-
-class Newsletter(models.Model):
-    """
-    A newsletter we can send to contacts.
-    It manages the subscribers.
-    """
-    title = models.CharField(_('newsletter title'), max_length=200)
-    slug = models.SlugField(db_index=True, unique=True)
-    active = models.BooleanField(_('active'), default=True)
-    newsletter_type = models.PositiveSmallIntegerField(_('type'), i
-                      choices=settings.NEWSLETTER_TYPE,
-                      help_text=_("The newsletter type determines what templates it will use."))
-    
-    sender_name = models.CharField(max_length=200, verbose_name=_('sender name'))
-    sender_email = models.EmailField(verbose_name=_('sender e-mail'),)
-    reply_email = models.EmailField(verbose_name=_("reply-to"), blank=True)
-
-    creation_date = models.DateTimeField(_('creation date'), auto_now_add=True)
-    modification_date = models.DateTimeField(_('modification date'), auto_now=True)
-
-    # Fields below are for later
-    #site = models.ForeignKey(Site, verbose_name=_("site"), related_name="newsletters", default=1)
-    #language = models.CharField(max_length=6, verbose_name=_("language"), choices=settings.LANGUAGES)
-
-    def __unicode__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = _('newsletter')
-        verbose_name_plural = _('newsletters')
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('newsletter_detail', (),
-                {'newsletter_slug': self.slug })
-
-    @models.permalink
-    def subscribe_url(self):
-        return ('newsletter_subscribe_request', (),
-                {'newsletter_slug': self.slug })
-
-    @models.permalink
-    def unsubscribe_url(self):
-        return ('newsletter_unsubscribe_request', (),
-                {'newsletter_slug': self.slug })
-
-    @models.permalink
-    def update_url(self):
-        return ('newsletter_update_request', (),
-                {'newsletter_slug': self.slug })
-
-    def get_sender(self):
-        return u'%s <%s>' % (self.sender_name, self.sender_email)
 
 
 class Emial(models.Model):
