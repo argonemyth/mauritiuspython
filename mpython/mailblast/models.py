@@ -104,7 +104,7 @@ class Subscription(models.Model):
         else:
             return _(u"%(email)s to %(newsletter)s") % {'email':self.email, 'newsletter':self.newsletter}
     
-    def save(self, force_insert=False, force_update=False):
+    def save(self, *args, **kwargs):
         assert self.user or self.email_field, _('Neither an email nor a username is set.')
         assert (self.user and not self.email_field) or (self.email_field and not self.user), _('If user is set, email must be null and vice versa.')
 
