@@ -131,7 +131,7 @@ class Subscription(models.Model):
         return u'%s' % (self.email)
 
 
-class Emial(models.Model):
+class Email(models.Model):
     """
     An individual email that will be sent out. 
     """
