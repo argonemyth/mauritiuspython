@@ -161,7 +161,9 @@ INSTALLED_APPS = (
     # The following two apps are for events and reservation
     'schedule',
     'easy_maps',
+    # newsletter related apps
     'mailblast',
+    'djcelery',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -233,3 +235,20 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 # For django-schedule
 FIRST_DAY_OF_WEEK = 1 # default value is 0 for Sunday
+
+# Django Celery
+import djcelery
+djcelery.setup_loader()
+
+# Celery Broker settings.
+#BROKER_URL = "amqp://mpython:mpythonpass@mpythonhost:5672/"
+BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+
+# List of modules to import when celery starts.
+CELERY_IMPORTS = ("mailblast.tasks", )
+
+## Using the database to store task state and results.
+CELERY_RESULT_BACKEND = "database"
+CELERY_RESULT_DBURI = "sqlite:///mydatabase.db"
+
+CELERY_ANNOTATIONS = {"tasks.add": {"rate_limit": "10/s"}}
