@@ -1,7 +1,7 @@
 # coding=utf-8
 from django.contrib import admin
 
-from mailblast.models import Newsletter, Subscription, Email
+from mailblast.models import Newsletter, Subscription, Email, SentLog
 
 
 class NewsletterAdmin(admin.ModelAdmin):
@@ -40,6 +40,16 @@ class EmailAdmin(admin.ModelAdmin):
     date_hierarchy = "date_create"
     ordering = ("-date_create", )
 
+class SentLogAdmin(admin.ModelAdmin):
+    """
+    Admin class for sent log.
+    """
+    list_display = ('email', 'to', 'result', 'timestamp', 'log_message')
+    list_filter = ('result', )
+    date_hierarchy = "timestamp"
+    ordering = ("-timestamp", )
+
 admin.site.register(Newsletter, NewsletterAdmin)
 admin.site.register(Subscription, SubscriptionAdmin)
 admin.site.register(Email, EmailAdmin)
+admin.site.register(SentLog, SentLogAdmin)

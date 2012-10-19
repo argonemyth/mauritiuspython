@@ -67,7 +67,7 @@ class Subscription(models.Model):
     user's subscription activity.
     """
     user = models.ForeignKey(User, blank=True, null=True, verbose_name=_('user'), related_name="emails")
-    newsletter = models.ForeignKey('Newsletter', verbose_name=_('newsletter'), )
+    newsletter = models.ForeignKey('Newsletter', verbose_name=_('newsletter'), related_name="subscription")
     name_field = models.CharField(db_column='name', max_length=100, blank=True, null=True, 
                                  verbose_name=_('name'), help_text=_('optional'))
     def get_name(self):
@@ -185,3 +185,26 @@ class Email(models.Model):
     def get_absolute_url(self):
         return ('newsletter_email_preview', (self.slug,))
 
+
+class SentLog(models.Model):
+    """
+    The result of email sending process.
+    """
+    RESULT_CODES = ( 
+        (1, _("success")),
+        (2, _("failure")),
+        (3, _("skipped - in blacklist")),
+        (4, _("unknown failure")),
+    )   
+
+    email = models.ForeignKey(Email, related_name="send_log")
+    to = models.EmailField()
+    result = models.PositiveSmallIntegerField(choices=RESULT_CODES)
+    timestamp = models.DateTimeField(auto_now_add=True, editable=False)
+    log_message = models.TextField(null=True, blank=True)
+
+    def __unicode__(self):
+        return u"%s to %s is %s" % (self.email, self.to, self.get_result_display())
+
+    class Meta:
+        ordering = ['-timestamp'] # - indicates descending order
