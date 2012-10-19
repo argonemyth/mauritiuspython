@@ -1,9 +1,19 @@
 from django.core.mail import EmailMultiAlternatives
-from django.template import loader, Context
+from django.template import loader, Context, TemplateDoesNotExist
 from celery import task
 import smtplib
 from time import sleep
 from mailblast.models import Email, SentLog
+
+class NoContent(Exception):
+    """
+    Will raise when there is there is no text or html content.
+    """
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+
 
 @task()
 def send_newsletter(email):
@@ -15,16 +25,23 @@ def send_newsletter(email):
     sender = email.newsletter.get_sender()
     
     # Get contents ready
-    # text_template, html_template = email.get_templates()
-    text_template = "mailblast/invite.txt"
-    html_template = "mailblast/invite.html"
+    text_template, html_template = email.newsletter.get_templates()
     d = Context({ 'email': email })
-    t = loader.get_template(text_template)
-    # text_content = t.render(email.content)
-    text_content = t.render(d)
-    t = loader.get_template(html_template)
-    #html_content = t.renderd(email.content)
-    html_content = t.render(d)
+    try:
+        t = loader.get_template(text_template)
+        text_content = t.render(d)
+    except TemplateDoesNotExist:
+        text_content = None
+
+    try:
+        t = loader.get_template(html_template)
+        html_content = t.render(d)
+    except TemplateDoesNotExist:
+        html_content = None
+
+    if not text_content and not html_content:
+        #print "None of the following two templates are found: %s and %s" % (text_template, html_template)
+        raise NoContent("None of the following two templates are found: %s and %s" % (text_template, html_template))
 
     """
     if email.image:

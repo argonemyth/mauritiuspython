@@ -59,6 +59,11 @@ class Newsletter(models.Model):
     def get_sender(self):
         return u'%s <%s>' % (self.sender_name, self.sender_email)
 
+    def get_templates(self):
+        temp_name = settings.NEWSLETTER_TYPE[self.newsletter_type-1][1].lower()
+        return "mailblast/" + temp_name + ".html", "mailblast/" + temp_name + ".txt"
+        
+
 
 class Subscription(models.Model):
     """
