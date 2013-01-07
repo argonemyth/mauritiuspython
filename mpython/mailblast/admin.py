@@ -35,7 +35,7 @@ def send_emails(modeladmin, request, queryset):
     queryset is the models that got selected.
     """
     for email in queryset:
-        send_newsletter(email)
+        send_newsletter.delay(email)
 send_emails.short_description = _("Send selected emails")
 
 
