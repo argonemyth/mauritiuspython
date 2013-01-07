@@ -18,10 +18,10 @@ class NoContent(Exception):
 @task()
 def send_newsletter(email):
     """
-    The task accepts an email and send it to all the subscribers in
-    the newsletter.
+    The task accepts a newsletter email and send it to all the subscribers.
+    It skip the subscribers we already sent the email to.
     """
-    email.change_status(3)
+    email.change_status(2)
     sender = email.newsletter.get_sender()
     
     # Get contents ready
@@ -98,6 +98,9 @@ def send_newsletter(email):
             #blast_logger.info(to_email.infoValue + " - Already Sent")
             print subscription.email + " - Already Sent"
 
+
     #blast_logger.info('Mailblast %s to %s is ended.' % (email.subject, listname))
+    email.change_status(3)
     print 'Mailblast %s to %s is ended.' % (email.subject, listname)
+    
     return True
