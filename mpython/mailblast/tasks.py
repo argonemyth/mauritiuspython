@@ -1,9 +1,23 @@
 from django.core.mail import EmailMultiAlternatives
 from django.template import loader, Context, TemplateDoesNotExist
+from django.template.loader import render_to_string
 from celery import task
 import smtplib
 from time import sleep
+from pynliner import Pynliner
 from mailblast.models import Email, SentLog
+
+
+class UnicodeSafePynliner(Pynliner):
+    def _get_output(self):
+        """
+        Generate Unicode string of `self.soup` and set it to `self.output`
+
+        Returns self.output
+        """
+        self.output = unicode(self.soup)
+        return self.output
+
 
 class NoContent(Exception):
     """
@@ -33,10 +47,19 @@ def send_newsletter(email):
     except TemplateDoesNotExist:
         text_content = None
 
-    try:
-        t = loader.get_template(html_template)
-        html_content = t.render(d)
-    except TemplateDoesNotExist:
+    if html_template:
+        try:
+            """
+            t = loader.get_template(html_template)
+            html_content = t.render(d)
+            """
+            html_content = UnicodeSafePynliner().from_string(
+                render_to_string(html_template, {
+                    'email': email,
+                })).run()
+        except TemplateDoesNotExist:
+            html_content = None
+    else:
         html_content = None
 
     if not text_content and not html_content:
@@ -64,16 +87,22 @@ def send_newsletter(email):
         try:
             email.send_log.get(to__iexact=subscription.email)
         except: 
-            try:
+            # Prepare the emails:
+            if html_content:
                 msg = EmailMultiAlternatives(email.subject, text_content, 
                                              sender, [recipient])
                 msg.attach_alternative(html_content, "text/html")
-                """
-                if html_content:
-                    msg.attach_alternative(html_content, "text/html")
-                elif email.file:
-                    msg.attach_file(email.file.path)
-                """
+            else:
+                msg = EmailMessage(email.subject, text_content, sender,
+                                  [recipient])
+            """
+            if html_content:
+                msg.attach_alternative(html_content, "text/html")
+            elif email.file:
+                msg.attach_file(email.file.path)
+            """
+
+            try:
                 msg.send()
                 db_log = SentLog(email=email, to=subscription.email, result=1)
                 db_log.save()

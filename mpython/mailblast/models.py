@@ -61,14 +61,12 @@ class Newsletter(models.Model):
 
     def get_templates(self):
         temp_name = self.template.lower()
-        if use_html:
+        if self.use_html:
             return "mailblast/" + temp_name + ".html", "mailblast/" + temp_name + ".txt"
         else:
-            return "mailblast/" + temp_name + ".txt"
+            return None, "mailblast/" + temp_name + ".txt"
         
         
-
-
 class Subscription(models.Model):
     """
     A individual subscription from a human being, could be an user,
