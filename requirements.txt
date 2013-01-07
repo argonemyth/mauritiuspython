@@ -14,5 +14,5 @@ celery==3.0.10
 django-celery==3.0.10
 kombu==2.4.7
 BeautifulSoup==3.2.1
-utils==0.9.10b1
+cssutils==0.9.10b1
 pynliner==0.4.0
