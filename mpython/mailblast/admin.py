@@ -30,15 +30,6 @@ class SubscriptionAdmin(admin.ModelAdmin):
     ordering = ('date_create', )
 
 
-def send_emails(modeladmin, request, queryset):
-    """
-    queryset is the models that got selected.
-    """
-    for email in queryset:
-        send_newsletter.delay(email)
-send_emails.short_description = _("Send selected emails")
-
-
 class EmailAdmin(admin.ModelAdmin):
     """
     Admin class for emails.
@@ -50,7 +41,16 @@ class EmailAdmin(admin.ModelAdmin):
     date_hierarchy = "date_create"
     ordering = ("-date_create", )
 
-    actions = [send_emails]
+    actions = ['send_emails']
+
+    def send_emails(self, request, queryset):
+        """
+        queryset is the models that got selected.
+        """
+        for email in queryset:
+            send_newsletter.delay(email)
+    send_emails.short_description = _("Send selected emails")
+
 
 class SentLogAdmin(admin.ModelAdmin):
     """
