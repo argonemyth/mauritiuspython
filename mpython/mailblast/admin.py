@@ -1,8 +1,9 @@
 # coding=utf-8
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 
 from mailblast.models import Newsletter, Subscription, Email, SentLog
-
+from mailblast.tasks import send_newsletter
 
 class NewsletterAdmin(admin.ModelAdmin):
     """
@@ -29,6 +30,15 @@ class SubscriptionAdmin(admin.ModelAdmin):
     ordering = ('date_create', )
 
 
+def send_emails(modeladmin, request, queryset):
+    """
+    queryset is the models that got selected.
+    """
+    for email in queryset:
+        send_newsletter(email)
+send_emails.short_description = _("Send selected emails")
+
+
 class EmailAdmin(admin.ModelAdmin):
     """
     Admin class for emails.
@@ -39,6 +49,8 @@ class EmailAdmin(admin.ModelAdmin):
     list_filter = ('status', )
     date_hierarchy = "date_create"
     ordering = ("-date_create", )
+
+    actions = [send_emails]
 
 class SentLogAdmin(admin.ModelAdmin):
     """
