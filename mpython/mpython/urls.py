@@ -4,13 +4,14 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from views import HomeView, AboutView
+from views import HomeView, AboutView, WorkshopView
 
 urlpatterns = patterns('',
     # Examples:
     #url(r'^$', 'mpython.views.home', name='home'),
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^about/$', AboutView.as_view(), name='about'),
+    url(r'^workshops/$', WorkshopView.as_view(), name='workshops'),
     # url(r'^mpython/', include('mpython.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
