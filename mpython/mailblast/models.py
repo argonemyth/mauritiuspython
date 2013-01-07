@@ -14,10 +14,10 @@ class Newsletter(models.Model):
     title = models.CharField(_('newsletter title'), max_length=200)
     slug = models.SlugField(db_index=True, unique=True)
     active = models.BooleanField(_('active'), default=True)
-    newsletter_type = models.PositiveSmallIntegerField(_('type'), 
-                      choices=settings.NEWSLETTER_TYPE,
-                      help_text=_("The newsletter type determines what templates it will use."))
-    
+    template = models.CharField(max_length=100, blank=True, default="default", 
+                                help_text=_("Name of of the template, which you will need to create under templates/mailblast"))
+    use_html = models.BooleanField(_('Use HTML?'), default=True)
+     
     sender_name = models.CharField(_('sender name'), max_length=200)
     sender_email = models.EmailField(_('sender e-mail'))
     reply_email = models.EmailField(_("reply-to"), blank=True)
@@ -60,8 +60,12 @@ class Newsletter(models.Model):
         return u'%s <%s>' % (self.sender_name, self.sender_email)
 
     def get_templates(self):
-        temp_name = settings.NEWSLETTER_TYPE[self.newsletter_type-1][1].lower()
-        return "mailblast/" + temp_name + ".html", "mailblast/" + temp_name + ".txt"
+        temp_name = self.template.lower()
+        if use_html:
+            return "mailblast/" + temp_name + ".html", "mailblast/" + temp_name + ".txt"
+        else:
+            return "mailblast/" + temp_name + ".txt"
+        
         
 
 

@@ -10,10 +10,11 @@ class NewsletterAdmin(admin.ModelAdmin):
     Admin class for newsletters.
     """
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ('title', 'active', 'newsletter_type', 'sender_name',
+    list_display = ('title', 'active', 'template', 'use_html', 'sender_name',
                     'sender_email', 'date_create', 'date_modify')
-    list_editable = ('active', 'newsletter_type', 'sender_name', 'sender_email')
-    list_filter = ('active', 'newsletter_type')
+    list_editable = ('active', 'template', 'use_html', 'sender_name', 
+                     'sender_email')
+    list_filter = ('active', )
     date_hierarchy = "date_create"
     ordering = ("-date_create", )
 
