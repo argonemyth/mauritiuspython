@@ -25,7 +25,7 @@ def send_newsletter(email):
     sender = email.newsletter.get_sender()
     
     # Get contents ready
-    text_template, html_template = email.newsletter.get_templates()
+    html_template, text_template = email.newsletter.get_templates()
     d = Context({ 'email': email })
     try:
         t = loader.get_template(text_template)
@@ -79,7 +79,7 @@ def send_newsletter(email):
                 db_log.save()
                 #blast_logger.info(to_email.infoValue + " - Email Sent")
                 print subscription.email + " - Email Sent"
-                sleep(30)
+                sleep(20)
             except (smtplib.SMTPSenderRefused, smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError), err:
                 #EmailLog.objects.log(email, to_email.infoValue, 2, log_message=str(err))
                 db_log = SentLog(email=email, to=subscription.email, result=2,
