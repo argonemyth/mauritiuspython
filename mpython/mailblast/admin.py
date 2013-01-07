@@ -35,9 +35,9 @@ class EmailAdmin(admin.ModelAdmin):
     Admin class for emails.
     """
     prepopulated_fields = {"slug": ("subject",)}
-    list_display = ('__unicode__', 'composer', 'status', 'date_create', 
-                    'date_modify',)
-    list_filter = ('status', )
+    list_display = ('__unicode__', 'newsletter', 'composer', 'status', 
+                    'date_create', 'date_modify',)
+    list_filter = ('newsletter', 'status', )
     date_hierarchy = "date_create"
     ordering = ("-date_create", )
 
