@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import ListView
+from django.utils.timezone import now
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -28,7 +29,8 @@ urlpatterns = patterns('',
     # For Events
     url(r'^meetups/', ListView.as_view(
         model = Event,
-        queryset = Event.objects.filter(calendar__slug='meetups'),
+        queryset = Event.objects.filter(calendar__slug='meetups')
+                        .filter(end__gt=now()).order_by('start'),
         template_name = "meetup_list.html",
         context_object_name = "meetup_list",
     ), name="meetups"),

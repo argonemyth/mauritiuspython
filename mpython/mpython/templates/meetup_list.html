@@ -1,0 +1,62 @@
+{% extends 'base/one_column.html' %}
+{% comment %}
+# This file is part of Maritius Python User Group.
+# Copyright (C) 2012 Fei Tan 
+# Copyright (C) 2012 Agonemyth, Inc. 
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% comment %}
+{% load base_extras %}
+{% load profile_extras %}
+{% endcomment %}
+{% load i18n %}
+{% load scheduletags %}
+
+{% block title %}Meetups{% endblock title %}
+
+{% block body_id %}{% endblock body_id %}
+
+{% block content %}
+    <div class="module" id="landing-module">
+        <h3>Monthly Meetups</h3>
+        <p>
+        Our python meetup is more of a social event than technical one. We welcome everyone to join our meetups. If you are a Python hacker, come to showcase your Python projects, to exchange your Python experiences, tips or jokes; if you are a startup founder looks for coders or technical advises, come and talk nerdy to us; if you are simply curious about Python or programming languages in general, we will tell you what Python can do for you. It's a friendly & relax environment to expand your knowledge about Python. Occasionally, we will have guests to give a talk or two! You can check the details below, or subscribe our newsletter to be informed for future meetups.
+        </p>
+        <div id="event-map">
+        </div>
+    </div>
+
+    <div class="module">
+        <div class="module-head">
+            <h3>Upcoming</h3>
+        </div>
+        <div class="module-body">
+            {% for event in meetup_list %}
+                <div>
+                    <h3><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h3>  
+                    
+                    <div class="date-time">Starts: {% blocktrans with event.start|date:_("DATETIME_FORMAT") as start_date %}{{ start_date }}{% endblocktrans %}</div>
+                    <div class="date-time">Ends:   {% blocktrans with event.end|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}</div>
+                </div>
+            {% endfor %}
+        </div> <!-- /#module-body -->
+    </div> <!-- /*landing-module -->
+    <div class="module">
+        <div class="module-head">
+            <h3>Check past meetups</h3>
+        </div>
+    </div>
+{% endblock content %}
