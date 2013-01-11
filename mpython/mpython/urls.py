@@ -1,10 +1,12 @@
 from django.conf.urls import patterns, include, url
+from django.views.generic import ListView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
 from views import HomeView, AboutView, WorkshopView
+from schedule.models import Event
 
 urlpatterns = patterns('',
     # Examples:
@@ -24,5 +26,11 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('userena.urls')),
 
     # For Events
+    url(r'^meetups/', ListView.as_view(
+        model = Event,
+        queryset = Event.objects.filter(calendar__slug='meetups'),
+        template_name = "meetup_list.html",
+        context_object_name = "meetup_list",
+    ), name="meetups"),
     url(r'^events/', include('schedule.urls')),
 )
