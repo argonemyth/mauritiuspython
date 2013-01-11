@@ -244,9 +244,6 @@ djcelery.setup_loader()
 #BROKER_URL = "amqp://mpython:mpythonpass@mpythonhost:5672/"
 BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 
-# List of modules to import when celery starts.
-CELERY_IMPORTS = ("mailblast.tasks", )
-
 ## Using the database to store task state and results.
 CELERY_RESULT_BACKEND = "database"
 CELERY_RESULT_DBURI = "sqlite:///mydatabase.db"
