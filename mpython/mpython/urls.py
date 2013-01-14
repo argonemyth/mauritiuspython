@@ -35,4 +35,5 @@ urlpatterns = patterns('',
         context_object_name = "meetup_list",
     ), name="meetups"),
     url(r'^events/', include('schedule.urls')),
+    url(r'^reserve/', include('django_reservations.urls')),
 )
