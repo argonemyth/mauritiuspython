@@ -161,6 +161,7 @@ INSTALLED_APPS = (
     # The following two apps are for events and reservation
     'schedule',
     'easy_maps',
+    'django_reservations',
     # newsletter related apps
     'djcelery',
     'emailblast',
