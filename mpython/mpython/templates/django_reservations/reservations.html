@@ -19,7 +19,10 @@
         {% endfor %}
         </ul>
     {% else %}
-        <p>No one has reserved so far, be the first to reserve!</p>
+        <p>
+            No one has reserved so far, be the first to reserve! <br />
+            You will need to <a href='{% url userena.views.signin %}'>log in</a> to reserve.
+        </p>
     {% endif %}
 {% if perms.django_reservations.change_eventreservations %}
 <a href="{% url admin:django_reservations_eventreservations_change occurrence.eventreservations.pk %}">Modify RSVP List</a>
