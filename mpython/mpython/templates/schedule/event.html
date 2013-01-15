@@ -45,25 +45,36 @@
         </div>
         <div class="module-body">
             {{ event.description|safe }}
-            <p><a href="#">RSVP Now &raquo;</a></p>
             <div class="separator"></div>
-            <h3>IDEAS</h3>
+            <div id="rsvp_user_list"></div>
+            {% if user.is_authenticated %}
+                <div class="separator"></div>
+                <div id="user_rsvp_status"></div>
+                <p><a id="rsvp-link"  href="{% url reservations_rsvp event.current_occurrence.id %}">RSVP Now &raquo;</a></p>
+                <div id="rsvp"></div>
+            {% endif %}
+
         </div> <!-- /#module-body -->
     </div> <!-- /*landing-module -->
-
-    <!-- Reservation Module -->
-    <div class="module">
-        <div class="module-head">
-            <h3>RSVP</h3>
-        </div>
-
-        <div id="rsvp-module" class="module-body">
-        </div>
-    </div> 
-
+    <div class="event_dialog"></div>
 {% endblock content %}
 
+{% block js %}
 <script type="text/javascript">
-    
+    $(function() {
+        /*  
+         * Load the RSVP related info via Ajax 
+         */
+        $('#rsvp_user_list').load('{% url reservations_reservations_view occurrence_id=event.current_occurrence.id %}');
+        $('#user_rsvp_status').load('{% url reservations_rsvp occurrence_id=event.current_occurrence.id %}');
+        $('a#rsvp-link').click( function(e) {
+            e.preventDefault();
+            url = $(this).attr('href');
+            //console.log(this, url);
+            $('#rsvp').load(url);
+        }); 
+    });    
 </script>
+{% endblock js %}
+
     

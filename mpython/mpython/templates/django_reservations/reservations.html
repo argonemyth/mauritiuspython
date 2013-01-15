@@ -1,0 +1,37 @@
+{% load i18n %}
+
+{% comment %}
+<h2 align="center">RSVPs for {{ occurrence.title }}</h2>
+<p><em>{% blocktrans with occurrence.start|date:_("DATETIME_FORMAT") as start_date %}{{ start_date }}{% endblocktrans %}</em> <strong>through</strong> <em>{% blocktrans with occurrence.end|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}</em></p>
+
+{% if user.is_authenticated %}
+<div id="user_rsvp_status"></div>
+{% endif %}
+{% endcomment %}
+
+<h3>RSVPers: {% if er.has_limit %}(max: <strong>{{ er.reservation_limit }}</strong>){% endif%} </h3>
+    {% if rsvpers %}
+        <ul class="horizontal-list">
+        {% for rsvper in rsvpers %}
+            <li style="display: inline-block; line-height: 50px; vertical-align: middle; height: 50px; margin-right: 5px;">
+                <img style='width: 50px;' src="{{ rsvper.profile.get_mugshot_url }}" alt="{{ rsvper.profile.get_full_name_or_username }}"/>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No one has reserved so far, be the first to reserver!</p>
+    {% endif %}
+{% if perms.django_reservations.change_eventreservations %}
+<a href="{% url admin:django_reservations_eventreservations_change occurrence.eventreservations.pk %}">Modify RSVP List</a>
+{% endif %}
+
+{% comment %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#rsvp').click(function() {
+            $(this).parent().parent().load($(this).attr('target'));
+            return false;
+        });
+    });
+</script>
+{% endcomment %}
