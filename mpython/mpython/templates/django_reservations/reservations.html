@@ -9,7 +9,7 @@
 {% endif %}
 {% endcomment %}
 
-<h3>RSVPers: {% if er.has_limit %}(max: <strong>{{ er.reservation_limit }}</strong>){% endif%} </h3>
+<h3>Attending geeks: {% if er.has_limit %}(max: <strong>{{ er.reservation_limit }}</strong>){% endif%} </h3>
     {% if rsvpers %}
         <ul class="horizontal-list">
         {% for rsvper in rsvpers %}
