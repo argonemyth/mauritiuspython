@@ -19,7 +19,7 @@
         {% endfor %}
         </ul>
     {% else %}
-        <p>No one has reserved so far, be the first to reserver!</p>
+        <p>No one has reserved so far, be the first to reserve!</p>
     {% endif %}
 {% if perms.django_reservations.change_eventreservations %}
 <a href="{% url admin:django_reservations_eventreservations_change occurrence.eventreservations.pk %}">Modify RSVP List</a>

@@ -28,6 +28,7 @@
 
 {% block title %}{{ event.title }}{% endblock title %}
 
+
 {% block body_id %}landing{% endblock body_id %}
 
 {% block content %}
@@ -50,8 +51,6 @@
             {% if user.is_authenticated %}
                 <div class="separator"></div>
                 <div id="user_rsvp_status"></div>
-                <p><a id="rsvp-link"  href="{% url reservations_rsvp event.current_occurrence.id %}">RSVP Now &raquo;</a></p>
-                <div id="rsvp"></div>
             {% endif %}
 
         </div> <!-- /#module-body -->
@@ -60,19 +59,35 @@
 {% endblock content %}
 
 {% block js %}
+<script type="text/javascript" src="http://malsup.github.com/jquery.form.js"></script>
 <script type="text/javascript">
     $(function() {
         /*  
          * Load the RSVP related info via Ajax 
          */
         $('#rsvp_user_list').load('{% url reservations_reservations_view occurrence_id=event.current_occurrence.id %}');
-        $('#user_rsvp_status').load('{% url reservations_rsvp occurrence_id=event.current_occurrence.id %}');
+        $('#user_rsvp_status').load('{% url reservations_rsvp occurrence_id=event.current_occurrence.id %}', function() {
+                load_ajax_form();
+        });
+        /*
         $('a#rsvp-link').click( function(e) {
             e.preventDefault();
             url = $(this).attr('href');
             //console.log(this, url);
             $('#rsvp').load(url);
         }); 
+        */
+        function load_ajax_form() {
+            $('#rsvp_form').ajaxForm({
+                target: '#rsvp_user_list',
+                /*
+                success: function() {
+                    $('.event_dialog').dialog('option', 'title', 'RSVP')
+                    $('.event_dialog').dialog("open");
+                }
+                */
+            });
+        }
     });    
 </script>
 {% endblock js %}
