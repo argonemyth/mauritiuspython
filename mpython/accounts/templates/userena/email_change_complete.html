@@ -1,0 +1,41 @@
+{% extends 'base/one_column.html' %}
+{% comment %}
+# This file is part of Maritius Python User Group.
+# Copyright (C) 2012 Fei Tan 
+# Copyright (C) 2012 Agonemyth, Inc. 
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Change Email" %}{% endblock %}
+
+{% block body_id %}body{% endblock %}
+
+{% block main %}
+
+<div class='module'>
+    <div class='module-head'>
+        <h3>{% trans "There is one more step..." %}</h3>
+    </div>
+
+    <div class='module-body'>
+        {% with viewed_user.userena_signup.email_unconfirmed as email  %}
+            <p>{% trans "You should receive an email at" %} {{ email }}</p>
+        {% endwith %}
+        <p>{% trans "To associate this email address with your account, click on the link provided in this email." %}</p>
+    </div>
+</div>
+{% endblock main %}
