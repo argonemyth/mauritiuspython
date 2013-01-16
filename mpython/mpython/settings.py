@@ -153,11 +153,11 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'south',
     'mpython',
-    'userena',
     # The following three apps are required by userena
     'guardian',
     'easy_thumbnails',
     'accounts',
+    'userena',
     # The following two apps are for events and reservation
     'schedule',
     'easy_maps',
