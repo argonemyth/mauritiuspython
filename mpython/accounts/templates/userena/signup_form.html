@@ -20,15 +20,15 @@
 
 {% load i18n %}
 
-{% block title %}{% trans "Log In" %}{% endblock %}
+{% block title %}{% trans "Sign Up" %}{% endblock %}
 
 {% block body_id %}body{% endblock %}
 
 {% block main %}
 
-<div id='signin' class='module'>
+<div id='signup' class='module'>
     <div class='module-head'>
-        <h3 style="text-align:center">{% trans "Log in" %}</h3>
+        <h3 style="text-align:center">{% trans "Sign Up" %}</h3>
     </div>
 
     <div class='module-body'>
@@ -43,13 +43,8 @@
             {% endfor %}
             {% endcomment %}
             <p>
-                <button type="submit">{% trans "Log In" %}</button>
+                <button type="submit">{% trans "Go!" %}</button>
                 {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
-            </p>
-            <p style="text-align: center">
-                <a href='{% url userena_password_reset %}' title="{% trans "Forgot your password?" %}">{% trans "Forgot your password?" %}</a>
-                <span> · </span>
-                <a href='{% url userena_signup %}' title="{% trans "Need an account?" %}">{% trans "Need an account?" %}</a>
             </p>
         </form>
     </div>
