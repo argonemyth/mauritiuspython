@@ -1,0 +1,121 @@
+{% extends 'base/two_columns.html' %}
+{% comment %}
+# This file is part of Maritius Python User Group.
+# Copyright (C) 2012 Fei Tan 
+# Copyright (C) 2012 Agonemyth, Inc. 
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n umessages_tags %}
+
+{% block less %}
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/base.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/one_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/two_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/three_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/profile.less">
+{% endblock less %}
+
+{% block body_id %}profile{% endblock %}
+
+{% block pagetop %}
+    <div id='nameplate'>
+        {% if user.first_name or user.last_name %}
+            <h1 class='name'>
+                {{ user.first_name }}
+                {{ user.last_name }}
+                <span class='username' style="font-size: .7em;">
+                    ({{ user.username }})
+                </span>
+            </h1>
+        {% else %}
+            <h1 class='name'>
+            <div class='name'>
+                {{ user.username }}
+            </div>
+            </h1>
+        {% endif %}
+        </div>
+    </div><!-- /.nameplate -->
+{% endblock pagetop %}
+
+{% block left %}
+{# Dirty hack. Will use django-guardian in the future. #}
+<div id='contacts' class='module'>
+    <div class='module-head'>
+        <h3>Inbox</h3>
+    </div>
+    <div class='module-body'>
+        <ul class="contacts">
+            {% for message in message_list %}
+            {% if forloop.first %}
+            <li class="active">
+            {% else %}
+            <li>
+            {% endif %}
+              {% if message.to_user == user %}
+                  <a href="{% url userena_umessages_detail message.from_user.username %}"></a>
+                  {% get_unread_message_count_between user and message.from_user as unread_between_count %}
+                  <img class="mugshot" alt="mugshot" src="{{ message.from_user.profile.get_mugshot_url }}" />
+                  <div class="message-container">
+                      <span>{{ message.from_user }}</span>
+                      <p>{{ message.latest_message|truncatechars:20}} ({{ unread_between_count }} {% trans "new" %})</p>
+                  </div>
+              {% else %}
+                  <a href="{% url userena_umessages_detail message.to_user.username %}"></a>
+                  {% get_unread_message_count_between user and message.from_user as unread_between_count %}
+                  <img style="width: 50px"alt="mugshot" src="{{ message.to_user.profile.get_mugshot_url }}" />
+                  <div class="message-container">
+                      <span>{{ message.to_user }}</span>
+                      <p>{{ message.latest_message|truncatechars:20 }} ({{ unread_between_count }} {% trans "new" %})</p>
+                  </div>
+              {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div id='profile-edit' class='module'>
+    <div class='module-head'>
+        <h3>Edit</h3>
+    </div>
+    <div class='module-body'>
+    </div>
+</div>
+{% endblock left %}
+
+{% block js %}
+<script type="text/javascript">
+    $(function() {
+        /* The initial conversation when the user entered the page. */
+        active_url = $("li.active a").attr('href');
+        console.log(active_url);
+        $('#conversation').load(active_url);
+        /* Changing conversation */
+        $('ul.contacts li').click( function(e) {
+            e.preventDefault();
+            $(this).addClass("active").siblings().removeClass("active");
+            url = $(this).find('a').attr('href');
+            console.log(this, url);
+            $('#conversation').load(url);
+        });
+    });
+</script>
+{% endblock js %}
+
+
+{% comment %}
+vim: set ai et ts=4 sw=4 nu:
+{% endcomment %}
