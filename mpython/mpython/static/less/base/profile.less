@@ -1,0 +1,55 @@
+@import "base";
+
+body#profile {
+
+    h1, h2, h3 {
+        font-family: Tuffy, Helvetica, sans-serif;
+    }
+
+    #nameplate {
+        float: left;
+        margin-top: 20px;
+        padding: 3px;
+
+        .name {
+            float: left;
+        }
+
+        h1, #sep, h2 {
+            font-size: 19pt;
+            font-weight: normal;
+            margin-right: 10px;
+            color: #000;
+        }
+
+        h1 a {
+            color: #000;
+        }
+    }
+
+    #avatar {
+        border: 3px solid #FFFFFF;
+        background-color: #FFFFFF;
+        padding: 0;
+
+        img {
+            float: left;
+            margin: 10px 20px;
+            width: 86.5%;
+        }
+    }
+
+    .module {
+        border: 3px solid @trans-blue;
+        .module-head {
+            background-color: @trans-blue;
+            padding: 2px 20px;
+            h3 { 
+                color: #000;
+                text-shadow: none;
+                font-size: 1.1em;
+                padding: 3px 0 5px 0;
+            }
+        }
+    }
+}

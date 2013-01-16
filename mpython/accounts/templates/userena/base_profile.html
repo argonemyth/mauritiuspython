@@ -1,0 +1,130 @@
+{% extends 'base/two_columns.html' %}
+{% comment %}
+# This file is part of Maritius Python User Group.
+# Copyright (C) 2012 Fei Tan 
+# Copyright (C) 2012 Agonemyth, Inc. 
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load profile_extras %}
+
+{% block less %}
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/base.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/one_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/two_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/three_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/profile.less">
+{% endblock less %}
+
+{% block body_id %}profile{% endblock %}
+
+{% block description_for_anonymous_users %}
+    <strong>
+        Learn below
+    </strong>
+    how he/she is involved in <abbr title='that is, Free, Libre Open Source Software'>FLOSS</abbr>
+{% endblock %}
+
+{% block pagetop %}
+    <div id='nameplate'>
+        {% if user.first_name or user.last_name %}
+            <h1 class='name'>
+                {{ person.user.first_name }}
+                {{ person.user.last_name }}
+                <span class='username' style="font-size: .7em;">
+                    ({{ user.username }})
+                </span>
+            </h1>
+        {% else %}
+            <h1 class='name'>
+            <div class='name'>
+                {{ user.username }}
+            </div>
+            </h1>
+        {% endif %}
+
+            {% comment %}
+	    <div style="clear: left; float: left;">
+          {% if person.show_email and person.user.email %}
+          <div>
+              <a href="mailto:{{ person.user.email }}">{{ person.user.email }}</a>
+          </div>
+          {% endif %}
+          {% endcomment %}
+	    </div>
+			
+    </div><!-- /.nameplate -->
+{% endblock pagetop %}
+
+{% block left %}
+<div id='avatar' class='module'>
+    <img src='{{ profile.get_mugshot_url }}'>
+</div>
+
+
+{# Dirty hack. Will use django-guardian in the future. #}
+{% if user.username == profile.user.username %}
+<div id='profile-edit' class='module'>
+    <div class='module-head'>
+        <h3>Edit</h3>
+    </div>
+    <div class='module-body'>
+        <ul>
+            {# <li><a href='{% url userena_profile_detail user.username %}'>View profile</a></li> #}
+            <li><a href='{% url userena_profile_edit user.username %}'>Edit details</a></li>
+            <li><a href='{% url userena_password_change user.username %}'>Change password</a></li>
+            <li><a href='{% url userena_email_change user.username %}'>Change email</a></li>
+        </ul>
+    </div>
+</div>
+{% endif %}
+
+<div id='info' class='module'>
+    <div class='module-head'>
+        <h3>Info</h3>
+    </div>
+
+    <div class='module-body'>
+        <style>
+            h4 { padding: 0;}
+        </style>
+
+        {% if profile.bio %}
+        <h4>bio</h4>
+        <p id="bio" style='clear: both;'>
+            {{ profile.bio }}
+        </p>
+        {% endif %}
+
+        {% if profile.homepage_url %}
+        <h4>web site</h4>
+        <p>
+            <a rel="me" href="{{ profile.homepage_url }}">{{ profile.homepage_url|break_long_words|safe }}</a>
+        </p>
+        {% endif %}
+
+        {% if person.irc_nick %}
+        <h4>irc nick</h4>
+        <p id="ircnick" style='clear: both;'>
+            {{ profile.irc_nick }}
+        </p>
+        {% endif %}
+    </div> <!-- end of person info module -->
+</div>
+{% endblock left %}
+
+{% comment %}
+vim: set ai et ts=4 sw=4 nu:
+{% endcomment %}
