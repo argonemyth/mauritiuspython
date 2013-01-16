@@ -41,8 +41,8 @@
     <div id='nameplate'>
         {% if user.first_name or user.last_name %}
             <h1 class='name'>
-                {{ person.user.first_name }}
-                {{ person.user.last_name }}
+                {{ user.first_name }}
+                {{ user.last_name }}
                 <span class='username' style="font-size: .7em;">
                     ({{ user.username }})
                 </span>

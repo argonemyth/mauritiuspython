@@ -1,0 +1,52 @@
+{% extends 'base/one_column.html' %}
+{% comment %}
+# This file is part of Maritius Python User Group.
+# Copyright (C) 2012 Fei Tan 
+# Copyright (C) 2012 Agonemyth, Inc. 
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Edit Profile" %}{% endblock %}
+
+{% block body_id %}body{% endblock %}
+
+{% block main %}
+
+<div id='signup' class='module'>
+    <div class='module-head'>
+        <h3 style="text-align:center">{% trans "Edit Your Profile" %}</h3>
+    </div>
+
+    <div class='module-body'>
+        <form action="{{request.path}}" method="post">
+            {% csrf_token %}
+            {{ form.as_p  }}
+            {% comment %}
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                {{ field.errors }}
+                <p> {{ field }}</p>
+            {% endfor %}
+            {% endcomment %}
+            <p>
+                <button type="submit">{% trans "SAVE" %}</button>
+                {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock main %}
