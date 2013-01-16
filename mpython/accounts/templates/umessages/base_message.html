@@ -55,7 +55,9 @@
 {# Dirty hack. Will use django-guardian in the future. #}
 <div id='contacts' class='module'>
     <div class='module-head'>
-        <h3>Inbox</h3>
+        <h3>Inbox
+        <span style="float: right; font-size: .95em"><a id="compose" href="{% url userena_umessages_compose %}">{% trans "New Message" %}</a></span>
+        </h3>
     </div>
     <div class='module-body'>
         <ul class="contacts">
@@ -109,6 +111,13 @@
             $(this).addClass("active").siblings().removeClass("active");
             url = $(this).find('a').attr('href');
             console.log(this, url);
+            $('#conversation').load(url);
+        });
+        /* Load the message box via Ajax */
+        $('a#compose').click( function(e) {
+            e.preventDefault();
+            url = $(this).attr('href');
+            console.log(url);
             $('#conversation').load(url);
         });
     });
