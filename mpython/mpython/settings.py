@@ -158,6 +158,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'accounts',
     'userena',
+    'userena.contrib.umessages',
     # The following two apps are for events and reservation
     'schedule',
     'easy_maps',
