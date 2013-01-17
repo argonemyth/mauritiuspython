@@ -167,6 +167,7 @@ h1 a, h1 a:hover { text-decoration: none; }
     border: @module-border;  
     background: @module-interior; 
     float: left;
+    h3 { font-family: Tuffy, Helvetica, sans-serif; }
 
     .module-head { 
         background: @module-border-color; 
@@ -177,20 +178,26 @@ h1 a, h1 a:hover { text-decoration: none; }
             float: none; 
             //padding: 4px 10px 7px 0; 
             padding: 3px 0 5px; 
-            font-family: Tuffy, Helvetica, sans-serif; 
             font-size: 1.1em;
             .title-shadow-dark;
         }
         .date-time {
+            color: #fff;
             display: inline-block;
             font-size: 1.2em;
             line-height: 150%;
             margin-right: 20px;
-            .title-shadow;
+            .title-shadow-dark;
         }
 
     }
-    .module-body { clear: both; padding: 10px @standard-padding @standard-padding @standard-padding;} 
+    .module-body { 
+        clear: both; 
+        padding: 10px @standard-padding @standard-padding @standard-padding;
+        .date-time {
+            font-size: .9em;
+        }
+    } 
     .module-foot { 
         padding: 2px @standard-padding 5px @standard-padding; 
         text-align: right; 
@@ -525,6 +532,18 @@ body#people-map #search_engine_is_down_message { float: left; display: block; ma
 
 fieldset {
     border: 1px dashed #666;
+}
+
+/* landing message - any paragraphs need bigger fonts */
+
+#landing-module {
+    background-color: #FFF;
+    border-color: #FFF;
+    #landing-message {
+        font-size: 2em;
+        margin: 0 0 20px;
+        padding: 10px 0 8px;
+    }
 }
 
 /* Form */

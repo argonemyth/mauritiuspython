@@ -27,36 +27,55 @@
 
 {% block title %}Meetups{% endblock title %}
 
-{% block body_id %}{% endblock body_id %}
+{% block less %}
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/base.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/one_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/two_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/three_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/events.less">
+{% endblock less %}
+
+{% block body_id %}events{% endblock body_id %}
 
 {% block content %}
     <div class="module" id="landing-module">
-        <h3>Monthly Meetups</h3>
-        <p>
-        Our python meetup is more of a social event than technical one. We welcome everyone to join our meetups. If you are a Python hacker, come to showcase your Python projects, to exchange your Python experiences, tips or jokes; if you are a startup founder looks for coders or technical advises, come and talk nerdy to us; if you are simply curious about Python or programming languages in general, we will tell you what Python can do for you. It's a friendly & relax environment to expand your knowledge about Python. Occasionally, we will have guests to give a talk or two! You can check the details below, or subscribe our newsletter to be informed for future meetups.
-        </p>
-        <div id="event-map">
+        <div class="module-body">
+            <p id="landing-message">
+            Our python meetup is more of a social event than technical one. We welcome <em>everyone</em> to join our meetups. 
+            </p>
+            <p style="font-size: 1.2em">If you are a Python hacker, come to showcase your Python projects, to exchange your Python experiences, tips or jokes; if you are a startup founder looks for coders or technical advises, come and talk nerdy to us; if you are simply curious about Python or programming languages in general, we will tell you what Python can do for you. It's a friendly & relax environment to expand your knowledge about Python. Occasionally, we will have guests to give a talk or two! You can check the details below, or subscribe our newsletter to be informed for future meetups.
+            </p>
         </div>
     </div>
 
     <div class="module">
         <div class="module-head">
-            <h3>Upcoming</h3>
+            <h3>Upcoming Meetups</h3>
         </div>
         <div class="module-body">
-            {% for event in meetup_list %}
-                <div>
-                    <h3><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h3>  
-                    
-                    <div class="date-time">Starts: {% blocktrans with event.start|date:_("DATETIME_FORMAT") as start_date %}{{ start_date }}{% endblocktrans %}</div>
-                    <div class="date-time">Ends:   {% blocktrans with event.end|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}</div>
-                </div>
-            {% endfor %}
+            {% if meetup_list %}
+                {% for event in meetup_list %}
+                    <div class="event-list">
+                        <h3><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h3>  
+                        <div class="date-time">
+                            {% blocktrans with event.start|date:_("DATETIME_FORMAT") as start_date %}{{ start_date }}{% endblocktrans %}
+                            -
+                            {% blocktrans with event.end|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}
+                        </div>
+                        <p>{{ event.description|safe|truncatewords:30 }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>There is no upcoming meetup...</p>    
+            {% endif %}
         </div> <!-- /#module-body -->
     </div> <!-- /*landing-module -->
     <div class="module">
         <div class="module-head">
-            <h3>Check past meetups</h3>
+            <h3>Past Meetups</h3>
+        </div>
+        <div class="module-body">
+            <p>There is no past meetup...</p>    
         </div>
     </div>
 {% endblock content %}
