@@ -4,7 +4,7 @@
     <h3>{% trans "New Message" %}</h3>
 </div>
 <div class="module-body">
-    <form action="" method="post" id="compose_message_form">
+    <form action="{% url userena_umessages_compose %}" method="post" id="compose_message_form">
       {% csrf_token %}
      {{ form.as_p }}
       <input type="submit" name="send" value="{% trans "Send" %}" />

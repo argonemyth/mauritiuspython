@@ -71,7 +71,7 @@
                   <a href="{% url userena_umessages_detail message.from_user.username %}"></a>
                   {% get_unread_message_count_between user and message.from_user as unread_between_count %}
                   <img class="mugshot" alt="mugshot" src="{{ message.from_user.profile.get_mugshot_url }}" />
-                  <div class="message-container">
+                  <div id="{{ message.from_user.username }}" class="message-container">
                       <span>{{ message.from_user }}</span>
                       <p>{{ message.latest_message|truncatechars:20}} ({{ unread_between_count }} {% trans "new" %})</p>
                   </div>
@@ -79,7 +79,7 @@
                   <a href="{% url userena_umessages_detail message.to_user.username %}"></a>
                   {% get_unread_message_count_between user and message.from_user as unread_between_count %}
                   <img style="width: 50px"alt="mugshot" src="{{ message.to_user.profile.get_mugshot_url }}" />
-                  <div class="message-container">
+                  <div id="{{ message.to_user.username }}" class="message-container">
                       <span>{{ message.to_user }}</span>
                       <p>{{ message.latest_message|truncatechars:20 }} ({{ unread_between_count }} {% trans "new" %})</p>
                   </div>
@@ -99,26 +99,36 @@
 {% endblock left %}
 
 {% block js %}
+<script type="text/javascript" src="http://malsup.github.com/jquery.form.js"></script>
 <script type="text/javascript">
     $(function() {
         /* The initial conversation when the user entered the page. */
         active_url = $("li.active a").attr('href');
-        console.log(active_url);
+        //console.log(active_url);
         $('#conversation').load(active_url);
         /* Changing conversation */
         $('ul.contacts li').click( function(e) {
             e.preventDefault();
             $(this).addClass("active").siblings().removeClass("active");
             url = $(this).find('a').attr('href');
-            console.log(this, url);
+            //console.log(this, url);
             $('#conversation').load(url);
         });
         /* Load the message box via Ajax */
         $('a#compose').click( function(e) {
             e.preventDefault();
             url = $(this).attr('href');
-            console.log(url);
-            $('#conversation').load(url);
+            //console.log(url);
+            $('#conversation').load(url, function() {
+                $('#compose_message_form').ajaxForm({
+                    target: '#conversation',
+                    success: function() {
+                        username = $('#conversation').find('h3').text().split(' ')[2]
+                        //console.log("Username: " + username);
+                        $('#'+username).closest('li').addClass("active").siblings().removeClass("active");
+                    }
+                });
+            });
         });
     });
 </script>

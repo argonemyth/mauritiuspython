@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # Account related
-    url(r'^accounts/messages/', include('userena.contrib.umessages.urls')),
+    url(r'^accounts/', include('accounts.urls')),
     url(r'^accounts/', include('userena.urls')),
 
     # For Events
