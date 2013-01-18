@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.utils.timezone import now
 
 # Uncomment the next two lines to enable the admin:
@@ -15,6 +15,9 @@ urlpatterns = patterns('',
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^about/$', AboutView.as_view(), name='about'),
     url(r'^workshops/$', WorkshopView.as_view(), name='workshops'),
+    url(r'^contribution/$', TemplateView.as_view(template_name='contribution.html'), name='contribute'),
+    url(r'^contact/$', TemplateView.as_view(template_name='contact.html'), name='contact'),
+
     # url(r'^mpython/', include('mpython.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
