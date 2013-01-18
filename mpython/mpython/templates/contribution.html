@@ -1,0 +1,60 @@
+{% extends 'base/one_column.html' %}
+{% comment %}
+# This file is part of Maritius Python User Group.
+# Copyright (C) 2012 Fei Tan 
+# Copyright (C) 2012 Agonemyth, Inc. 
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% comment %}
+{% load base_extras %}
+{% load profile_extras %}
+{% endcomment %}
+{% load i18n %}
+{% load scheduletags %}
+
+{% block title %}Contribution{% endblock title %}
+
+{% block less %}
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/base.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/one_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/two_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/three_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/events.less">
+{% endblock less %}
+
+{% block body_id %}contribution{% endblock body_id %}
+
+{% block pagetop %}
+{% endblock pagetop %}
+
+{% block content %}
+    <div class="module" id="landing-module">
+        <div class="module-body">
+            <p id="landing-message">For every events we are going to organize, we might need some additional helps from you. Trust me, it will be fun!</p>
+</p>
+<p style="font-size: 1.2em">It's not that easy to organize events, we will need everyone's help. For each event (especially the workshop), we will estimate the resources and tasks needed and we will post them here, it's up to yous to decide what to contribute.</p>
+        </div>
+    </div>
+
+    <div class="module">
+        <div class="module-head">
+            <h3>Upcoming Opportunities </h3>
+        </div>
+        <div class="module-body">
+            <p>Oops, I haven't had time to write the module to manage the opportunites yet, it will come soon!</p>
+        </div>
+    </div> 
+{% endblock content %}
