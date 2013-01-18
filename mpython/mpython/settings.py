@@ -197,14 +197,6 @@ LOGGING = {
     }
 }
 
-# Mail Info
-EMAIL_HOST = 'mail.gandi.net'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'admin@argonemyth.com'
-EMAIL_HOST_PASSWORD = 'tingohell@286'
-SERVER_EMAIL = 'admin@argonemyth.com'
-EMAIL_SUBJECT_PREFIX = "[argonemyth.com]"
 
 # We are going to use userena's auth backend for user authentication
 AUTHENTICATION_BACKENDS = (
@@ -249,3 +241,10 @@ BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 ## Using the database to store task state and results.
 CELERY_RESULT_BACKEND = "database"
 CELERY_RESULT_DBURI = "sqlite:///mydatabase.db"
+
+# if local_settings.py file present, import the variables from it (overriding
+# locally).
+try:
+    from local_settings import *
+except ImportError:
+    pass
