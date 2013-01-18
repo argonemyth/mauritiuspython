@@ -1,0 +1,6 @@
+From: {{ name }} ({{ email }})
+
+{{ message }}
+
+---
+This message was sent via the website contact form.

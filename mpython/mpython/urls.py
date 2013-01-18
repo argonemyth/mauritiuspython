@@ -16,7 +16,6 @@ urlpatterns = patterns('',
     url(r'^about/$', AboutView.as_view(), name='about'),
     url(r'^workshops/$', WorkshopView.as_view(), name='workshops'),
     url(r'^contribution/$', TemplateView.as_view(template_name='contribution.html'), name='contribute'),
-    url(r'^contact/$', TemplateView.as_view(template_name='contact.html'), name='contact'),
 
     # url(r'^mpython/', include('mpython.foo.urls')),
 
@@ -40,4 +39,7 @@ urlpatterns = patterns('',
     ), name="meetups"),
     url(r'^events/', include('schedule.urls')),
     url(r'^reserve/', include('django_reservations.urls')),
+    
+    # contact
+    url(r'^contact/', include('contact.urls')),
 )

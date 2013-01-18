@@ -166,6 +166,8 @@ INSTALLED_APPS = (
     # newsletter related apps
     'djcelery',
     'emailblast',
+    # contact
+    'contact',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -241,6 +243,9 @@ BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 ## Using the database to store task state and results.
 CELERY_RESULT_BACKEND = "database"
 CELERY_RESULT_DBURI = "sqlite:///mydatabase.db"
+
+# For contact box
+CONTACT_EMAILS = 'hello@mpython.org'
 
 # if local_settings.py file present, import the variables from it (overriding
 # locally).
