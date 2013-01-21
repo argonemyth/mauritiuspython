@@ -90,12 +90,12 @@
             <div id="action-content" class="module-body">
             <div class="submodule-container">
                 <div class="submodule">
-                    <h4><a href='/meetups/'>monthly meetups</a></h4>
-                    <p>enjoy python talks or simply come to meet other python enthusastics with our <a href='/meetups/'>monthly hangout &raquo;</a></p>
+                    <h4><a href='{% url meetups %}'>monthly meetups</a></h4>
+                    <p>enjoy python talks or simply come to meet other python enthusastics with our <a href='{% url meetups %}'>monthly hangout &raquo;</a></p>
                 </div>
                 <div class="submodule">
-                    <h4><a href='#'>workshops</a></h4>
-                    <p>discover your programming passion with us in a beginner-friendly and stress-free <a href="#">environment &raquo;</a></p>
+                    <h4><a href='{% url workshops %}'>workshops</a></h4>
+                    <p>discover your programming passion with us in a beginner-friendly and stress-free <a href='{% url workshops %}'>environment &raquo;</a></p>
                 </div>
                 <div class="submodule">
                     <h4><a href='{% url contribute %}'>help us</a></h4>

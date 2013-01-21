@@ -1,0 +1,92 @@
+{% extends 'base/one_column.html' %}
+{% comment %}
+# This file is part of Maritius Python User Group.
+# Copyright (C) 2012 Fei Tan 
+# Copyright (C) 2012 Agonemyth, Inc. 
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% comment %}
+{% load base_extras %}
+{% load profile_extras %}
+{% endcomment %}
+{% load i18n %}
+{% load scheduletags %}
+
+{% block title %}Workshops{% endblock title %}
+
+{% block less %}
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/base.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/one_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/two_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/three_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/events.less">
+{% endblock less %}
+
+{% block body_id %}events{% endblock body_id %}
+
+{% block content %}
+    <div class="module" id="landing-module">
+        <div class="module-body">
+            <p id="landing-message">
+            {% trans "Our workshops are project-driven events that last 1 or 2 days!" %}
+            </p>
+            <p style="font-size: 1.2em">
+            The idea of workshop is largely inspired by <a href="http://bostonpythonworkshop.com/" target="_blank">Boston Python Workshop</a>,
+            because they share a working workshop design pattern that others can use! We will follow similar pattern for the beginner workshop: 
+            </p>
+            <ol style="font-size: 1.1em">
+                <li>Half a day or a couple of hours to setup development environment;</li> 
+                <li>Half a day or a couple of hours to cover the basic of Python; </li>
+                <li>Having lunch;</li>
+                <li>working on a selected project that you are interested in.</li> 
+            </ol>
+            <p style="font-size: 1.2em">
+            We welcome <em>everyone</em> to attend the workshop, as we believe this is the age that everyone should know a thing or two about coding! If you have any ideas or questions, don't hesitate to <a href="{% url contact %}">contact us</a>.
+            </p>
+        </div>
+    </div>
+
+    <div class="module">
+        <div class="module-head">
+            <h3>Upcoming Workshops</h3>
+        </div>
+        <div class="module-body">
+            {% if workshop_list %}
+                {% for event in workshop_list %}
+                    <div class="event-list">
+                        <h3><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h3>  
+                        <div class="date-time">
+                            {% blocktrans with event.start|date:_("DATETIME_FORMAT") as start_date %}{{ start_date }}{% endblocktrans %}
+                            -
+                            {% blocktrans with event.end|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}
+                        </div>
+                        <p>{{ event.description|safe|truncatewords:30 }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>There is no upcoming workshop...</p>    
+            {% endif %}
+        </div> <!-- /#module-body -->
+    </div> <!-- /*landing-module -->
+    <div class="module">
+        <div class="module-head">
+            <h3>Past Workshops</h3>
+        </div>
+        <div class="module-body">
+            <p>There is no past workshop...</p>    
+        </div>
+    </div>
+{% endblock content %}

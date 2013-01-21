@@ -6,7 +6,7 @@ from django.utils.timezone import now
 from django.contrib import admin
 admin.autodiscover()
 
-from views import HomeView, AboutView, WorkshopView
+from views import HomeView, AboutView
 from schedule.models import Event
 
 urlpatterns = patterns('',
@@ -14,7 +14,6 @@ urlpatterns = patterns('',
     #url(r'^$', 'mpython.views.home', name='home'),
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^about/$', AboutView.as_view(), name='about'),
-    url(r'^workshops/$', WorkshopView.as_view(), name='workshops'),
     url(r'^contribution/$', TemplateView.as_view(template_name='contribution.html'), name='contribute'),
 
     # url(r'^mpython/', include('mpython.foo.urls')),
@@ -37,6 +36,13 @@ urlpatterns = patterns('',
         template_name = "meetup_list.html",
         context_object_name = "meetup_list",
     ), name="meetups"),
+    url(r'^workshops/', ListView.as_view(
+        model = Event,
+        queryset = Event.objects.filter(calendar__slug='workshops')
+                        .filter(end__gt=now()).order_by('start'),
+        template_name = "workshop_list.html",
+        context_object_name = "workshop_list",
+    ), name="workshops"),
     url(r'^events/', include('schedule.urls')),
     url(r'^reserve/', include('django_reservations.urls')),
     
