@@ -244,8 +244,11 @@ BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 CELERY_RESULT_BACKEND = "database"
 CELERY_RESULT_DBURI = "sqlite:///mydatabase.db"
 
+# Email settings - put SMTP server config in local_settings
+EMAIL_SUBJECT_PREFIX = "Mauritius Python"
+
 # For contact box
-CONTACT_EMAILS = 'hello@mpython.org'
+CONTACT_EMAILS = ('hello@mpython.org', )
 
 # if local_settings.py file present, import the variables from it (overriding
 # locally).

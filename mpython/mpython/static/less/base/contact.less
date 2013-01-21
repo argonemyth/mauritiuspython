@@ -1,0 +1,32 @@
+@import "base";
+
+.module-body {
+    .two-column-left { width: 30%; }
+    .two-column-right { 
+        float: left; 
+        width: 69%; 
+        border-left: 2px dashed @light-blue;
+        min-height: 350px;
+        margin-bottom: 10px;
+        #landing-message { 
+            padding-top: 25% !important;
+            padding-left: 20px !important;
+        }
+    }
+}
+
+.title {
+    font-size: 1.5em;
+    color: @orange;
+    margin-left: 10%;
+    padding: 5px;
+}
+
+#contact-form {
+    label { width: 20%; }
+    input[type="text"], textarea { width: 300px; }
+    input[type="submit"] {
+        float: left;
+        margin-left: 40%;
+    }
+}

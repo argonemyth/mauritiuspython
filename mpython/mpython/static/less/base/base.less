@@ -26,6 +26,7 @@
 */
 @trans-blue: rgba(47, 109, 104, .6);
 @trans-orange: rgba(250, 105, 0, .8);
+@lightest-brown: #F4EFD1;
 
 
 @page-bg: @lightest-grey url('/static/images/light-sq.png') repeat;
@@ -104,7 +105,7 @@
 body { 
     font: @normal-size Tuffy, Helvetica, sans-serif; 
     /* background: @lightest-grey url('/static/images/light-sq.png') repeat; */ 
-    background: @lightest-grey url('/static/images/metal.png') repeat; 
+    background: @lightest-brown url('/static/images/metal.png') repeat; 
     color: @default-text-color; 
     width: 100%; 
     .centered; 
@@ -597,5 +598,25 @@ form {
        
     .datetime {
         font-size: .9em;
+    }
+}
+
+.social {
+    padding-right: 5%;
+    padding-top: 20%;
+    h3 { 
+        font-size: 1.8em;
+        color: @orange; 
+        border-bottom: 1px solid @orange; 
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+    a.email, a.irc { font-size: 1.1em; color: @medium-grey; }
+    a.twitter { 
+        background: url("/static/images/social.png") no-repeat scroll 0 0 transparent;
+        float: left;
+        height: 40px;
+        width: 40px;
+        text-indent: -9999px;
     }
 }

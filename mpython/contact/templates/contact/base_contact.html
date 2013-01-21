@@ -22,9 +22,38 @@
 
 {% block title %}{% trans "Contact" %}{% endblock title %}
 
+{% block less %}
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/base.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/one_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/two_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/contact.less">
+{% endblock less %}
+
+
 {% block body_id %}contact{% endblock body_id %}
 
 {% block content %}
-    {% block form %}
-    {% endblock %}
+    <div class="module" id="landing-module">
+        <div class="module-body">
+            <div class="two-column-left">
+                <ul class="social">
+                    <li>
+                        <h3>EMAIL</h3>
+                        <a class="email" href="mailto:hello@mpython.org">hello@mpython.org</a></span>
+                    </li>
+                    <li>
+                        <h3>IRC</h3>
+                        <a class="irc" href="irc://irc.freenode.net/mauritiuspython">#mauritiuspython</a>
+                    </li>
+                    <li>
+                        <h3>Social Networks</h3>
+                        <a class="twitter" href="https://twitter.com/MuPython" alt="twitter" target="_blank"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="two-column-right">
+                {% block form %}{% endblock %}
+            </div>
+        </div>
+    </div>
 {% endblock content %}
