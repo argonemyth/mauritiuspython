@@ -19,3 +19,4 @@ git+https://github.com/argonemyth/django-emailblast.git
 git+https://github.com/argonemyth/django-reservations.git
 # Apps for prod
 psycopg2==2.4.5
+gunicorn==0.16.1
