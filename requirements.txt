@@ -13,6 +13,7 @@ billiard==2.7.3.15
 celery==3.0.10
 django-celery==3.0.10
 kombu==2.4.7
+pytz==2012j
 git+https://github.com/argonemyth/django-emailblast.git
 # Apps for prod
 git+https://github.com/argonemyth/django-reservations.git

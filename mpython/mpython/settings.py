@@ -168,6 +168,7 @@ INSTALLED_APPS = (
     'emailblast',
     # contact
     'contact',
+    'twitter_timeline',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -249,6 +250,10 @@ EMAIL_SUBJECT_PREFIX = "Mauritius Python"
 
 # For contact box
 CONTACT_EMAILS = ('hello@mpython.org', )
+
+# Twitter
+TWITTER_USER = "argonemyth"
+TWITTER_NUMTWEETS = 5 
 
 # if local_settings.py file present, import the variables from it (overriding
 # locally).

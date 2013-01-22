@@ -22,13 +22,19 @@
         <h3>Recent Tweets</h3>
     </div>
     <div class='module-body'>
-        <ul style="padding-bottom: 5px;">
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-        </ul>
+        {% if recent_tweets %}
+            <ul>
+                {% for tweet in recent_tweets %}
+                <li class="event-list" style="font-size: .9em; float: left; width: 100%">
+                    <h3>{{ tweet.text|safe }}</h3>  
+                    <div class="date-time">
+                        <a href="{{ tweet.permalink }}">Posted {{ tweet.created_at|timesince }} ago</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Oops, no tweets yet!</p>
+        {% endif %}
     </div>
 </div>
