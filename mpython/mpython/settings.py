@@ -3,15 +3,9 @@
 import os
 PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__)))
 
-if 'deathleak' in PROJECT_DIR:
-    DEBUG = True
-else:
-    DEBUG = False
-
-
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-# For what?
 INTERNAL_IPS = ('127.0.0.1', )
 
 ADMINS = (
@@ -20,40 +14,12 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-if 'deathleak' in PROJECT_DIR:
-    # local db
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': os.path.join(PROJECT_DIR, "mpython.db"),  # Or path to database file if using sqlite3.
-            'USER': '',                      # Not used with sqlite3.
-            'PASSWORD': '',                  # Not used with sqlite3.
-            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': 'mauritiuspython',  # Or path to database file if using sqlite3.
-            'USER': 'maupython',                      # Not used with sqlite3.
-            'PASSWORD': 'maupy@node',                  # Not used with sqlite3.
-            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-        }
-    }
-
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-if 'deathleak' in PROJECT_DIR:
-    TIME_ZONE = 'Indian/Mauritius'
-else:
-    #TIME_ZONE = 'America/Chicago'
-    TIME_ZONE = None
+TIME_ZONE = 'Indian/Mauritius'
+#TIME_ZONE = None
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
