@@ -40,7 +40,11 @@
     <div class="module map-module">
         <div class="module-body">
             <div id="event-map">
-                {% easy_map event.location 100% 300 %}
+                {% if event.location %}
+                    {% easy_map event.location 100% 300 %}
+                {% else %}
+                    {% easy_map 'Grand Baie, Rivière du Rempart, Mauritius' 100% 300 %}
+                {% endif %} 
             </div>
         </div>
     </div>
@@ -58,7 +62,9 @@
         <div class="module-body">
             <p>{{ event.description }}</p>
             {% if event.location %}
-                <h4>{% trans "Location:" %} {{ event.location }} (see map above!)</h4>
+                <h4>{% trans "Location:" %} {{ event.location }} (see the map above)</h4>
+            {% else %}
+                <h4>{% trans "Location: Unknown" %} - <a href="{% url contact  %}">{% trans "suggest a location" %}</a></h4>
             {% endif %}
             <div class="separator"></div>
             <div id="rsvp_user_list"></div>
