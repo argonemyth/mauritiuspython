@@ -32,39 +32,36 @@
 
 {% block description_for_anonymous_users %}
     <strong>
-        Learn below
+        Anonymous!!
     </strong>
-    how he/she is involved in <abbr title='that is, Free, Libre Open Source Software'>FLOSS</abbr>
 {% endblock %}
 
+{# IMPORTANT: The user object here is the current logged in user. #}
 {% block pagetop %}
     <div id='nameplate'>
-        {% if user.first_name or user.last_name %}
+        {% if profile.user.first_name or profile.user.last_name %}
             <h1 class='name'>
-                {{ user.first_name }}
-                {{ user.last_name }}
+                {{ profile.user.first_name }}
+                {{ profile.user.last_name }}
                 <span class='username' style="font-size: .7em;">
-                    ({{ user.username }})
+                    ({{ profile.user.username }})
                 </span>
             </h1>
         {% else %}
             <h1 class='name'>
             <div class='name'>
-                {{ user.username }}
+                {{ profile.user.username }}
             </div>
             </h1>
         {% endif %}
 
-            {% comment %}
 	    <div style="clear: left; float: left;">
-          {% if person.show_email and person.user.email %}
+          {% if profile.show_email and profile.user.email %}
           <div>
-              <a href="mailto:{{ person.user.email }}">{{ person.user.email }}</a>
+              <a href="mailto:{{ profile.user.email }}">{{ profile.user.email }}</a>
           </div>
           {% endif %}
-          {% endcomment %}
 	    </div>
-			
     </div><!-- /.nameplate -->
 {% endblock pagetop %}
 
@@ -72,7 +69,6 @@
 <div id='avatar' class='module'>
     <img src='{{ profile.get_mugshot_url }}'>
 </div>
-
 
 {# Dirty hack. Will use django-guardian in the future. #}
 {% if user.username == profile.user.username %}
@@ -108,17 +104,31 @@
         </p>
         {% endif %}
 
-        {% if profile.homepage_url %}
+        {% if profile.website %}
         <h4>web site</h4>
-        <p>
-            <a rel="me" href="{{ profile.homepage_url }}">{{ profile.homepage_url|break_long_words|safe }}</a>
+        <p style='clear: both;'>
+            <a target="_blank" href="{{ profile.website }}">{{ profile.website|break_long_words|safe }}</a>
         </p>
         {% endif %}
 
-        {% if person.irc_nick %}
+        {% if profile.twitter %}
+        <h4>twitter username</h4>
+        <p style='clear: both;'>
+            <a target="_blank" href="https://twitter.com/{{ profile.twitter }}">{{ profile.twitter }}</a>
+        </p>
+        {% endif %}
+
+        {% if profile.irc_nick %}
         <h4>irc nick</h4>
-        <p id="ircnick" style='clear: both;'>
+        <p style='clear: both;'>
             {{ profile.irc_nick }}
+        </p>
+        {% endif %}
+
+        {% if profile.skype_nick %}
+        <h4>skype nick</h4>
+        <p style='clear: both;'>
+            {{ profile.skype_nick }}
         </p>
         {% endif %}
     </div> <!-- end of person info module -->
