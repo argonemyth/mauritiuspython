@@ -60,7 +60,8 @@
             </h3>
         </div>
         <div class="module-body">
-            <p>{{ event.description }}</p>
+            {# The event description might include HTML #}
+            <div>{{ event.description|safe }}</div>
             {% if event.location %}
                 <h4>{% trans "Location:" %} {{ event.location }} (see the map above)</h4>
             {% else %}
