@@ -28,24 +28,38 @@
 
 {% block title %}{{ event.title }}{% endblock title %}
 
+{% block less %}
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/base.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/one_column.less">
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/base/events.less">
+{% endblock less %}
 
-{% block body_id %}landing{% endblock body_id %}
+{% block body_id %}events{% endblock body_id %}
 
 {% block content %}
-    <div class="module" id="landing-module">
-        <div id="event-map">
-            {% easy_map event.location 930 300 %}
+    <div class="module map-module">
+        <div class="module-body">
+            <div id="event-map">
+                {% easy_map event.location 100% 300 %}
+            </div>
         </div>
     </div>
 
-    <div class="module">
+    <div class="module event-module">
         <div class="module-head">
-            <h3>{{event.title}}</h3>
-            <div class="date-time">Starts: {% blocktrans with event.start|date:_("DATETIME_FORMAT") as start_date %}{{ start_date }}{% endblocktrans %}</div>
-            <div class="date-time">Ends:   {% blocktrans with event.end|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}</div>
+            <h3>
+                {{event.title}}
+                <span class="date-time">
+                    {% blocktrans with event.start|date:_("DATETIME_FORMAT") as start_date %}{{ start_date }}{% endblocktrans %} -
+                    {% blocktrans with event.end|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}
+                </span>
+            </h3>
         </div>
         <div class="module-body">
-            {{ event.description|safe }}
+            <p>{{ event.description }}</p>
+            {% if event.location %}
+                <h4>{% trans "Location:" %} {{ event.location }} (see map above!)</h4>
+            {% endif %}
             <div class="separator"></div>
             <div id="rsvp_user_list"></div>
             {% if user.is_authenticated %}

@@ -1,5 +1,22 @@
 @import "base";
 
+body#events {
+    .map-module {
+        border: none;
+        .module-body{ padding: 3px; }
+        .box-shadow(0, 0, 7px, @dark-grey);
+    }
+}
+
+.event-module {
+    .module-head {
+        .date-time {
+            float: right;
+            font-size: 0.9em;
+        }
+    }
+}
+
 #rsvp_user_list, #user_rsvp_status {
     margin: 10px 0;
 
@@ -15,3 +32,7 @@
     border-bottom: 1px solid @module-border-color;
     &:last-child { border-bottom: none; }
 } 
+
+#rsvp_form {
+    label { width: 5em; }
+}
