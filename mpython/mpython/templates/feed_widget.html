@@ -20,23 +20,23 @@
             <h3>Recent site activity</h3>
         </div>
         <div class='module-body'>
+        {% if recent_activities %}
             <ul>
-                <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
-                {% comment %}
-                {% for answer in recent_feed_items %}
-                {% include answer.template_for_feed %}
-                <div class="clearer"></div>
+                {% for activity in recent_activities %}
+                <li class="event-list" style="font-size: .9em; float: left; width: 100%">
+                    <h3><a href="#">{{ activity }}</a></h3>  
+                    <div class="date-time">
+                    </div>
+                </li>
                 {% endfor %}
-                {% endcomment %}
             </ul>
-            
+        {% else %}
+            <p>Coming soon, won't be empty for long!</p>
+        {% endif %}
         </div>
+        {% comment %}
         <div class="module-foot">
+            <a href='#'>Read more about getting involved &raquo;</a>
         </div>
+        {% endcomment %}
     </div>

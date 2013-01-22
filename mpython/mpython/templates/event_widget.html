@@ -15,28 +15,35 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% endcomment %} 
-    <div class='module' id='recent-activity-feed'>
-        <div class='module-head'>
-            <h3>Recent Events</h3>
-        </div>
-        <div class='module-body'>
-            <ul>
-                <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
-                {% comment %}
-                {% for answer in recent_feed_items %}
-                {% include answer.template_for_feed %}
-                <div class="clearer"></div>
-                {% endfor %}
-                {% endcomment %}
-            </ul>
-            
-        </div>
-        <div class="module-foot">
-        </div>
+{% load i18n %}
+
+<div class='module' id='recent-activity-feed'>
+    <div class='module-head'>
+        <h3>Recent Events</h3>
     </div>
+    <div class='module-body'>
+        {% if recent_events %}
+            <ul>
+                {% for event in recent_events %}
+                <li class="event-list" style="font-size: .9em; float: left; width: 100%">
+                    <h3><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h3>  
+                    <div class="date-time">
+                        {% blocktrans with event.start|date:_("DATETIME_FORMAT") as start_date %}{{ start_date }}{% endblocktrans %}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Coming soon, won't be empty for long!</p>
+        {% endif %}
+            {% comment %}
+            {% for answer in recent_feed_items %}
+            {% include answer.template_for_feed %}
+            <div class="clearer"></div>
+            {% endfor %}
+            {% endcomment %}
+        
+    </div>
+    <div class="module-foot">
+    </div>
+</div>
