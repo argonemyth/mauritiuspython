@@ -15,5 +15,6 @@ django-celery==3.0.10
 kombu==2.4.7
 pytz==2012j
 git+https://github.com/argonemyth/django-emailblast.git
-# Apps for prod
 git+https://github.com/argonemyth/django-reservations.git
+# Apps for prod
+psycopg2==2.4.5
