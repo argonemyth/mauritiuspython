@@ -22,16 +22,15 @@ def get_tweets():
         return {'tweets': tweets}
 
     # Build the URL
+    # This API won't work after they deprecate v1 of the API. 
+    # V1.1 will need OAuth even it's to get public timeline.
     url = 'http://api.twitter.com/1/statuses/user_timeline/%s.json?count=%i' %\
           (twitter_settings.TWITTER_USER, twitter_settings.TWITTER_NUMTWEETS)
 
-    print url
     # Attempt to pull the tweets from the Twitter API in JSON format.
     try:
         page = urlopen(url)
-        print page
         timeline = simplejson.loads(page.read())
-        print timeline
     except:
         timeline = None
     else:

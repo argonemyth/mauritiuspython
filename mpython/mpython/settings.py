@@ -252,7 +252,7 @@ EMAIL_SUBJECT_PREFIX = "Mauritius Python"
 CONTACT_EMAILS = ('hello@mpython.org', )
 
 # Twitter
-TWITTER_USER = "argonemyth"
+TWITTER_USER = "MuPython"
 TWITTER_NUMTWEETS = 5 
 
 # if local_settings.py file present, import the variables from it (overriding

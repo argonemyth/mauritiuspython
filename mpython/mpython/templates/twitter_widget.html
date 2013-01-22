@@ -28,7 +28,7 @@
                 <li class="event-list" style="font-size: .9em; float: left; width: 100%">
                     <h3>{{ tweet.text|safe }}</h3>  
                     <div class="date-time">
-                        <a href="{{ tweet.permalink }}">Posted {{ tweet.created_at|timesince }} ago</a>
+                        <a target="_blank" href="{{ tweet.permalink }}">Posted {{ tweet.created_at|timesince }} ago</a>
                     </div>
                 </li>
                 {% endfor %}
