@@ -1,0 +1,7 @@
+Dear {{ recipient }}, 
+
+{{ email.content|striptags }}
+
+Best,
+
+MPython Email Bot
