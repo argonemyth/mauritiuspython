@@ -208,8 +208,8 @@ djcelery.setup_loader()
 BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 
 ## Using the database to store task state and results.
-CELERY_RESULT_BACKEND = "database"
-CELERY_RESULT_DBURI = "sqlite:///mydatabase.db"
+#CELERY_RESULT_BACKEND = "database"
+#CELERY_RESULT_DBURI = "sqlite:///mydatabase.db"
 
 # Email settings - put SMTP server config in local_settings
 EMAIL_SUBJECT_PREFIX = "Mauritius Python"
