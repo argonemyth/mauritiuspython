@@ -48,4 +48,7 @@ urlpatterns = patterns('',
     
     # contact
     url(r'^contact/', include('contact.urls')),
+
+    # emailblast
+    url(r'^emailblast/', include('emailblast.urls')),
 )
