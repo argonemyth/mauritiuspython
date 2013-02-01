@@ -14,7 +14,9 @@
         <ul class="horizontal-list">
         {% for rsvper in rsvpers %}
             <li style="display: inline-block; line-height: 50px; vertical-align: middle; height: 50px; margin-right: 5px;">
-                <img style='width: 50px;' src="{{ rsvper.profile.get_mugshot_url }}" alt="{{ rsvper.profile.get_full_name_or_username }}"/>
+                <a href="{% url userena_profile_detail rsvper.username  %}">
+                    <img style='width: 50px;' src="{{ rsvper.profile.get_mugshot_url }}" alt="{{ rsvper.profile.get_full_name_or_username }}"/>
+                </a>
             </li>
         {% endfor %}
         </ul>
